@@ -1,0 +1,18 @@
+set $mod Mod4
+
+set $left h
+set $down j
+set $up k
+set $right l
+
+set $term alacritty
+set $menu 'rofi -combi-modi window,drun -show combi -modi combi,drun -show-icons -icon-theme "Papirus"  -font "sans 18"'
+
+output * bg ~/Pictures/winux.jpg fill
+
+#bindsym $mod+Return scratchpad show
+
+exec export SWAYSOCK=/run/user/$(id -u)/sway-ipc.$(id -u).$(pgrep -x sway).sock
+
+include ~/.config/sway/conf.d/*conf
+include /etc/sway/config.d/*

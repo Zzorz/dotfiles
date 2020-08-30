@@ -1,0 +1,21 @@
+INPUT_METHOD  DEFAULT=fcitx5
+GTK_IM_MODULE DEFAULT=fcitx5
+QT_IM_MODULE  DEFAULT=fcitx5
+XMODIFIERS    DEFAULT=\@im=fcitx5
+
+LC_ALL	DEFAULT=en_US.UTF-8
+RUSTUP_DIST_SERVER	DEFAULT=https://mirrors.tuna.tsinghua.edu.cn/rustup
+WINEDEBUG				DEFAULT=-all
+
+XDG_CONFIG_HOME  DEFAULT=@{HOME}/.config
+XDG_DATA_HOME    DEFAULT=@{HOME}/.local/share
+XDG_BIN_HOME    DEFAULT=@{HOME}/.local/bin
+XDG_SESSION_TYPE	DEFAULT=wayland
+QT_QPA_PLATFORM	DEFAULT=wayland
+SDL_VIDEODRIVER	DEFAULT=wayland
+QT_WAYLAND_DISABLE_WINDOWDECORATION	DEFAULT="1"
+_JAVA_AWT_WM_NONREPARENTING	DEFAULT=1
+QT_QPA_PLATFORMTHEME	DEFAULT=qt5ct
+
+#QT_STYLE_OVERRIDE	DEFAULT="Adwaita"
+#_JAVA_OPTIONS			DEFAULT="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
