@@ -4,6 +4,3 @@
 [submodule "dot_tmux/plugins/tpm"]
 	path = dot_tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm.git
-[submodule "dot_local/private_share/vim-plug"]
-	path = dot_local/private_share/vim-plug
-	url = https://github.com/junegunn/vim-plug.git
