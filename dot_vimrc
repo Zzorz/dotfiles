@@ -1,4 +1,4 @@
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.local/share/vim-plug')
 
 Plug 'junegunn/vim-easy-align'
 "Plug 'terryma/vim-expand-region'
