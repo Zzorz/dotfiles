@@ -1,0 +1,55 @@
+#! /bin/bash
+
+alacritty
+zsh $HOME/.config/bspwm/autostart.sh
+AWT_TOOLKIT=MToolkit; export AWT_TOOLKIT
+xsetroot -cursor_name left_ptr
+
+function float {
+	bspc rule -a $1 state=floating center=on rectangle=${2}x${3}+0+0
+}
+
+
+bspc monitor -d j k u i
+
+bspc config border_width         1
+bspc config window_gap			 3
+#bspc config focused_border_color "#ffffff"
+#bspc config normal_border_color "#969696"
+#bspc config top_padding 0
+
+
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+
+bspc config external_rules_command ~/.config/bspwm/external_rules.sh 
+bspc rule -a \* node=.floating layer=normal
+bspc rule -a \* node=.tiled layer=normal
+bspc rule -a FirefoxNightly:Navigator state=tiled
+
+float GoldenDict:* 1280 800
+float Firefox:Browser 1280 800
+float FirefoxNightly:Browser 1280 800
+float Xfce4-panel:xfce4-panel 1280 800
+float Wrapper-1.0:wrapper-1.0 1280 800
+float Zeal:* 1280 800
+float netease-cloud-music:* 1280 800
+float Terminal:Float 1280 800
+float Pcmanfm:*  1280 800
+float FloatingTerminal:* 1280 800
+float Thunar:thunar 1280 800
+float deepin-system-monitor:* 1280 800
+float Drill-search-gtk:* 1080 600
+float Xfce4-terminal:* 1280 800
+
+#bspc rule -a FloatingTerminal:* state=floating center=on rectangle=1280x800+0+0 hidden=on
+
+bspc rule -a Wine:tim.exe state=floating
+bspc rule -a me-guoyunhe-fontweak-MainWindow:* state=floating
+bspc rule -a Ulauncher:ulauncher state=floating
+bspc rule -a Ghidra:* state=floating
+bspc rule -a Wine:ida.exe state=floating
+bspc rule -a Wine:ida64.exe state=floating
+bspc rule -a anbox:* state=floating
+
+bspc rule -a Emacs:* state=tiled
