@@ -5,7 +5,7 @@ source $HOME/.zsh/starship.zsh
 ##################################################################################
 #	PLUGIN MANAGER
 ##################################################################################
-source "$HOME/.loca/share/zinit/zinit.zsh"
+source "$HOME/.local/share/zinit/zinit.zsh"
 autoload -Uz _zinit && (( ${+_comps} )) && _comps[zinit]=_zinit
 
 source $HOME/.zsh/zsh-histdb/sqlite-history.zsh
