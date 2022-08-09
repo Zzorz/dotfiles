@@ -1,3 +1,14 @@
+function generate_file() {
+    if ! test -f $2 
+    then
+        eval $1 > $2
+    fi
+}
+##################################################################################
+#   generate config file
+##################################################################################
+generate_file "starship init zsh --print-full-init" "$HOME/.zsh/starship.zsh"
+generate_file "zoxide init zsh" "$HOME/.zsh/zoxide.zsh"
 ##################################################################################
 #	PROMPT
 ##################################################################################
@@ -8,32 +19,23 @@ source $HOME/.zsh/starship.zsh
 source "$HOME/.local/share/zinit/zinit.zsh"
 autoload -Uz _zinit && (( ${+_comps} )) && _comps[zinit]=_zinit
 
-source $HOME/.zsh/zsh-histdb/sqlite-history.zsh
-autoload -Uz add-zsh-hook
-
-zinit light-mode wait silent for \
+zinit light-mode wait lucid silent for \
 	mattberther/zsh-pyenv \
 	psprint/zsh-editing-workbench \
 	zdharma/fast-syntax-highlighting \
 	hlissner/zsh-autopair \
 	ael-code/zsh-colored-man-pages \
 	atload'_zsh_autosuggest_start' zsh-users/zsh-autosuggestions \
-	atload'_zsh_autosuggest_start' zpm-zsh/colorize \
-	atload'export AUTO_NOTIFY_THRESHOLD=60;\
-			export AUTO_NOTIFY_EXPIRE_TIME=100;' MichaelAquilina/zsh-auto-notify
-#	#felixr/docker-zsh-completion \
+	atload'_zsh_autosuggest_start' zpm-zsh/colorize 
 
-zinit wait silent is-snippet for \
-	/usr/share/doc/fzf/examples/completion.zsh \
+zinit light-mode wait lucid silent is-snippet for \
+    https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh \
 	$HOME/.zsh/dir_colors.zsh \
     $HOME/.zsh/zoxide.zsh \
-	/usr/share/doc/fzf/examples/key-bindings.zsh \
+    https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh \
 	OMZ::plugins/urltools/urltools.plugin.zsh \
 	PZT::modules/completion/init.zsh
 
-	#OMZ::lib/key-bindings.zsh \
-	#$HOME/.zsh/histdb.zsh \
-#bindkey -r "^[c";bindkey -r "^T" 
 
 ##################################################################################
 #	ENVIRONMENTS VARIABLES
