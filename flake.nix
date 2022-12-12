@@ -29,10 +29,10 @@
         ];
       };
 
-      desktop = nixpkgs.lib.nixosSystem {
+      deskmini = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./hosts/desktop/configuration.nix
+          ./hosts/deskmini/configuration.nix
           home-manager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
