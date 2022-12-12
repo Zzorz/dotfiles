@@ -1,6 +1,0 @@
-[submodule "dot_local/private_share/zinit"]
-	path = dot_local/private_share/zinit
-	url = https://github.com/zdharma-continuum/zinit.git
-[submodule "dot_tmux/plugins/tpm"]
-	path = dot_tmux/plugins/tpm
-	url = https://github.com/tmux-plugins/tpm.git
