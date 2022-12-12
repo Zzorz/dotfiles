@@ -11,7 +11,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "0xdeadbeef";
+  networking.hostName = "deskmini";
   time.timeZone = "Asia/Shanghai";
 
   services.openssh.enable = true;
