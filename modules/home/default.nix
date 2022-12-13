@@ -1,7 +1,8 @@
 { config, ... }:
 
 {
-  imports = [
-    ./zoxide
-  ];
+  programs = {
+    git.enable = true;
+    zoxide.enable = true;
+  };
 }

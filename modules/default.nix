@@ -11,6 +11,7 @@
       dates = "weekly";
       options = "--delete-older-than 30d";
     };
+    settings.substituters = [ "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store" ];
   };
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [

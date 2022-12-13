@@ -15,7 +15,7 @@
     doom.url = "github:nix-community/nix-doom-emacs";
   };
   
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, home-manager-unstable, doom, ... }@inputs: {
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, home-manager-unstable, doom, ... }: {
     nixosConfigurations = {
 
       virtual = nixpkgs.lib.nixosSystem {

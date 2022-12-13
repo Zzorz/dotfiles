@@ -1,0 +1,1 @@
+{ services.sxhkd.enable = true; }
