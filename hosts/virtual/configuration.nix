@@ -11,7 +11,7 @@
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
   boot.loader.grub.device = "/dev/sda";
-  networking.hostName = "0xdeadbeef";
+  networking.hostName = "virtual";
   time.timeZone = "Asia/Shanghai";
 
   services.openssh.enable = true;
