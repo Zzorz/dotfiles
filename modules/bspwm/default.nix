@@ -1,6 +1,6 @@
 {
-    service.xserver.enable = true;
-    service.xserver.videoDrivers = [ "amdgpu" ];
-    service.xserver.displayManager.lightdm.enable = true;
-    service.xserver.windowManager.bspwm.enable = true;
+    services.xserver.enable = true;
+    services.xserver.videoDrivers = [ "amdgpu" ];
+    services.xserver.displayManager.sddm.enable = true;
+    services.xserver.windowManager.bspwm.enable = true;
 }
