@@ -2,6 +2,6 @@
 
 {
   imports = [
-    ../../../users/razyang.nix
+    ../../../users/razyang
   ];
 }

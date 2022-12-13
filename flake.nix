@@ -17,10 +17,10 @@
   
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, home-manager-unstable, doom, ... }: {
     nixosConfigurations = {
-
       virtual = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
+          { nixpkgs.config.allowUnfree = true; }
           ./hosts/virtual/configuration.nix
           home-manager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
@@ -32,6 +32,7 @@
       deskmini = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
+          { nixpkgs.config.allowUnfree = true; }
           ./hosts/deskmini/configuration.nix
           home-manager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
