@@ -1,1 +1,6 @@
-{ services.sxhkd.enable = true; }
+{ 
+  services.sxhkd.enable = true; 
+  programs = {
+    rofi.enable = true; 
+  }
+}
