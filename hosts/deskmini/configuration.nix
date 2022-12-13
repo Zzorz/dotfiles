@@ -5,6 +5,7 @@
     [ 
       ./hardware-configuration.nix
       ../../modules
+      ../../bspwm
       ./users/razyang.nix
     ];
 
