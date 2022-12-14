@@ -13,10 +13,6 @@
     programs.git.userName = "RazYang";
     programs.git.userEmail = "xzzorz@gmail.com";
 
-    programs = {
-      chromium.enable = true;
-    };
-
     services.sxhkd.extraConfig = (builtins.readFile ./config/sxhkdrc);
 
     programs.tmux = {
@@ -32,6 +28,9 @@
       doomPrivateDir = ./config/doom.d;
     };
 
+    home.packages = [ 
+      pkgs.google-chrome
+    ];
     programs.zsh = {
       enable = true;
       plugins = [

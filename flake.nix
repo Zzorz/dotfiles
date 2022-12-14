@@ -21,7 +21,7 @@
       stateVersion = "22.11";
     };
     makeNixOSModules = { hostname, system }: [
-      home-manager.nixosModules.home-manager 
+      home-manager.nixosModules.home-manager
       {
         home-manager = {
           useGlobalPkgs = true;
