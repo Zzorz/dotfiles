@@ -13,6 +13,10 @@
   programs.git.userEmail = "xzzorz@gmail.com";
 
   services.sxhkd.extraConfig = (builtins.readFile ./config/sxhkdrc);
+  services.picom = {
+    enable = true;
+    vSync = true;
+  };
 
   programs.tmux = {
     enable = true;
@@ -25,7 +29,19 @@
     doomPrivateDir = ./config/doom.d;
   };
 
-  home.packages = with pkgs; [ google-chrome ripgrep nixfmt ];
+  xdg.enable = true;
+
+  home.packages = with pkgs; [
+    google-chrome
+    ripgrep
+    nixfmt
+    gnome.nautilus
+    fd
+    nix-index
+    ncdu
+    dig
+    bottom
+  ];
   programs.zsh = {
     enable = true;
     plugins = [{
@@ -44,10 +60,35 @@
 
   programs.fzf.enable = true;
 
-  i18n.inputMethod.enabled = "fcitx5";
-  i18n.inputMethod.fcitx5.addons = with pkgs; [ fcitx5-rime ];
+  xsession.windowManager.bspwm.startupPrograms = [ "ibus-daemon -d" ];
 
-  xsession.windowManager.bspwm.startupPrograms = [ "fcitx5" ];
+  home.pointerCursor = {
+    name = "Bibata Ice";
+    package = pkgs.bibata-cursors;
+    gtk.enable = true;
+    x11.enable = true;
+    x11.defaultCursor = "left_ptr";
+  };
+
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Breeze";
+      package = pkgs.breeze-gtk;
+    };
+    cursorTheme = {
+      name = "Bibata Ice";
+      package = pkgs.bibata-cursors;
+    };
+    iconTheme = {
+      name = "Papirus";
+      package = pkgs.papirus-icon-theme;
+    };
+    font = {
+      name = "Noto Sans CJK SC";
+      package = pkgs.noto-fonts-cjk-sans;
+    };
+  };
 
   home.stateVersion = "22.11";
 }
