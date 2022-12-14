@@ -1,12 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ 
-      ./hardware-configuration.nix
-      ../../modules
-      ../../modules/bspwm
-    ];
+  imports = [ ./hardware-configuration.nix ../../modules ../../modules/bspwm ];
 
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
@@ -34,4 +29,3 @@
   home-manager.users.razyang = import ../../users/razyang;
   system.stateVersion = "22.11"; # Did you read the comment?
 }
-

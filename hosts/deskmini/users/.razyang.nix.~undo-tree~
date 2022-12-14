@@ -1,0 +1,7 @@
+(undo-tree-save-format-version . 1)
+"773ee8a0513a3872c08902a6d0e4554a45b156e8"
+[nil nil nil nil (25497 52963 308599 974000) 0 nil]
+([nil current ((#("
+  " 0 1 (fontified t) 1 2 (fontified t highlight-indent-guides-prop (0 nil t 1 (character nil (face highlight-indent-guides-character-face display "│")) ((#<marker at 18 in razyang.nix> . #<marker at 57 in razyang.nix>))) display "│" face highlight-indent-guides-character-face) 2 3 (fontified t highlight-indent-guides-prop (0 nil nil 1 nil ((#<marker at 18 in razyang.nix> . #<marker at 57 in razyang.nix>))))) . 31) (undo-tree-id0 . -1) (undo-tree-id1 . -1) (undo-tree-id2 . -2) (undo-tree-id3 . -3) (#(" " 0 1 (fontified t highlight-indent-guides-prop (1 nil nil 1 nil ((#<marker at 31 in razyang.nix> . #<marker at 54 in razyang.nix>) (#<marker at 18 in razyang.nix> . #<marker at 57 in razyang.nix>))))) . 35) (#("
+ " 0 1 (fontified t) 1 2 (fontified t highlight-indent-guides-prop (0 nil t 1 (character nil (face highlight-indent-guides-character-face display "│")) ((#<marker at 18 in razyang.nix> . #<marker at 57 in razyang.nix>))) display "│" face highlight-indent-guides-character-face)) . 58) (undo-tree-id4 . -1) (undo-tree-id5 . -2) 1 (t 25497 43949 123259 776000)) nil (25497 52963 308597 370000) 0 nil])
+nil

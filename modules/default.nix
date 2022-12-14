@@ -1,4 +1,4 @@
-{ config, pkgs, lib, nixpkgs, ...}:
+{ config, pkgs, lib, nixpkgs, ... }:
 
 {
   nix = {
@@ -11,11 +11,9 @@
       dates = "weekly";
       options = "--delete-older-than 30d";
     };
-    settings.substituters = [ "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store" ];
+    settings.substituters =
+      [ "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store" ];
   };
   nixpkgs.config.allowUnfree = true;
-  environment.systemPackages = with pkgs; [
-    vim
-    tree
-  ];
+  environment.systemPackages = with pkgs; [ vim tree ];
 }

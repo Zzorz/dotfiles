@@ -1,7 +1,5 @@
 { ... }:
 
 {
-  imports = [
-    ../../../users/razyang
-  ];
+  imports = [ ../../../users/razyang ];
 }

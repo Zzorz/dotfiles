@@ -1,12 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ 
-      ./hardware-configuration.nix
-      ../../modules
-      ../../modules/bspwm
-    ];
+  imports = [ ./hardware-configuration.nix ../../modules ../../modules/bspwm ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -14,7 +9,7 @@
   networking.hostName = "deskmini";
   time.timeZone = "Asia/Shanghai";
 
-  services.xserver.videoDrivers = [ "amdgpu"  ];
+  services.xserver.videoDrivers = [ "amdgpu" ];
   services.openssh.enable = true;
 
   networking.firewall.enable = false;
@@ -32,6 +27,6 @@
     };
   };
   home-manager.users.razyang = import ../../users/razyang;
- 
+
   system.stateVersion = "22.11"; # Did you read the comment?
 }

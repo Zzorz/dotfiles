@@ -1,0 +1,7 @@
+(undo-tree-save-format-version . 1)
+"e81e9876830c118e5b94f06feb5a9509bbfd8400"
+[nil nil nil nil (25497 52998 485912 962000) 0 nil]
+([nil current ((#("
+ " 0 1 (fontified t) 1 2 (fontified t highlight-indent-guides-prop (0 nil t 1 (character nil (face highlight-indent-guides-character-face display "│")) ((#<marker at 2 in default.nix<6>> . #<marker at 36 in default.nix<6>>))) display "│" face highlight-indent-guides-character-face)) . 2) (undo-tree-id0 . -1) (undo-tree-id1 . -1) (undo-tree-id2 . -1) (undo-tree-id3 . -2) (38 . 39) (#("
+" 0 1 (fontified t)) . 38) 1 (t 25497 43949 124259 903000)) nil (25497 52998 485910 407000) 0 nil])
+nil

@@ -14,46 +14,54 @@
     };
     doom.url = "github:nix-community/nix-doom-emacs";
   };
-  
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, home-manager-unstable, doom, ... }@inputs: 
-  let
-    vars = {
-      stateVersion = "22.11";
-    };
-    makeNixOSModules = { hostname, system }: [
-      home-manager.nixosModules.home-manager
-      {
-        home-manager = {
-          useGlobalPkgs = true;
-          useUserPackages = true;
-          extraSpecialArgs = { inherit inputs vars; };
-        };
-      }
-      (./hosts + "/${hostname}" + /configuration.nix)
-    ];
-    makeNixOSConfiguration = { hostname, system }: nixpkgs.lib.nixosSystem {
-      inherit system;
-      modules = makeNixOSModules {inherit hostname system;} ;
-    };
 
-    makeNixConfiguration = { username, system }: inputs.home-manager.lib.homeManagerConfiguration {
-      modules = [
-        { 
-          home = {
-            inherit username;
-            homeDirectory = "/home/${username}";
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager
+    , home-manager-unstable, doom, ... }@inputs:
+    let
+      vars = { stateVersion = "22.11"; };
+      makeNixOSModules = { hostname, system }: [
+        home-manager.nixosModules.home-manager
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            extraSpecialArgs = { inherit inputs vars; };
           };
         }
-        (./users + "/${username}")
+        (./hosts + "/${hostname}" + /configuration.nix)
       ];
-    };
-  in
-  {
-    nixosConfigurations = {
-      virtual = makeNixOSConfiguration {hostname="virtual"; system = "x86_64-linux";};
-      deskmini = makeNixOSConfiguration {hostname="deskmini"; system = "x86_64-linux";};
-    };
-    homeConfigurations.razyang = makeNixConfiguration {username="razyang"; system = "x86_64-linux";};
-  };
-}
+      makeNixOSConfiguration = { hostname, system }:
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = makeNixOSModules { inherit hostname system; };
+        };
 
+      makeNixConfiguration = { username, system }:
+        inputs.home-manager.lib.homeManagerConfiguration {
+          modules = [
+            {
+              home = {
+                inherit username;
+                homeDirectory = "/home/${username}";
+              };
+            }
+            (./users + "/${username}")
+          ];
+        };
+    in {
+      nixosConfigurations = {
+        virtual = makeNixOSConfiguration {
+          hostname = "virtual";
+          system = "x86_64-linux";
+        };
+        deskmini = makeNixOSConfiguration {
+          hostname = "deskmini";
+          system = "x86_64-linux";
+        };
+      };
+      homeConfigurations.razyang = makeNixConfiguration {
+        username = "razyang";
+        system = "x86_64-linux";
+      };
+    };
+}
