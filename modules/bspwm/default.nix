@@ -3,7 +3,6 @@
 {
   services.xserver = {
     enable = true;
-    videoDrivers = [ "amdgpu" ];
     displayManager.sddm.enable = true;
     windowManager.bspwm.enable = true;
     excludePackages = [ pkgs.xterm ];

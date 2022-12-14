@@ -15,6 +15,7 @@
   networking.hostName = "deskmini";
   time.timeZone = "Asia/Shanghai";
 
+  services.xserver.videoDrivers = [ "amdgpu"  ];
   services.openssh.enable = true;
 
   networking.firewall.enable = false;
