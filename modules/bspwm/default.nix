@@ -16,6 +16,7 @@
   ];
   fonts.fontconfig = {
     enable = true;
+    hinting.style = "hintfull";
     defaultFonts = {
       emoji = ["Noto Color Emoji"];
       monospace = ["Hack"];

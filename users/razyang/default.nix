@@ -41,7 +41,15 @@
     ncdu
     dig
     bottom
+    ghidra-bin
+    gef
+    radare2
+    feh
+    nitrogen
+    file
+    iperf3
   ];
+
   programs.zsh = {
     enable = true;
     plugins = [{
@@ -60,25 +68,26 @@
 
   programs.fzf.enable = true;
 
-  xsession.windowManager.bspwm.startupPrograms = [ "ibus-daemon -d" ];
+  xsession.windowManager.bspwm.startupPrograms = [ 
+    "ibus-daemon -d"
+    "xsetroot -cursor_name left_ptr"
+    "nitrogen --restore"
+  ];
 
   home.pointerCursor = {
-    name = "Bibata Ice";
+    name = "Bibata-Original-Ice";
     package = pkgs.bibata-cursors;
     gtk.enable = true;
     x11.enable = true;
     x11.defaultCursor = "left_ptr";
   };
 
+
   gtk = {
     enable = true;
     theme = {
       name = "Breeze";
       package = pkgs.breeze-gtk;
-    };
-    cursorTheme = {
-      name = "Bibata Ice";
-      package = pkgs.bibata-cursors;
     };
     iconTheme = {
       name = "Papirus";
