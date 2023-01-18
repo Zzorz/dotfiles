@@ -38,6 +38,7 @@
 
       makeNixConfiguration = { username, system }:
         inputs.home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.${system};
           modules = [
             {
               home = {
@@ -59,9 +60,15 @@
           system = "x86_64-linux";
         };
       };
-      homeConfigurations.razyang = makeNixConfiguration {
-        username = "razyang";
-        system = "x86_64-linux";
+      homeConfigurations = {
+	razyang = makeNixConfiguration {
+          username = "razyang";
+          system = "x86_64-linux";
+	};
+	root = makeNixConfiguration {
+          username = "root";
+          system = "x86_64-linux";
+	};
       };
     };
 }
