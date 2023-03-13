@@ -15,5 +15,5 @@
       [ "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store" ];
   };
   nixpkgs.config.allowUnfree = true;
-  environment.systemPackages = with pkgs; [ vim tree ];
+  environment.systemPackages = with pkgs; [ ];
 }

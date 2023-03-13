@@ -21,6 +21,7 @@
     jq
     git
     zoxide
+    tree
   ];
   programs.home-manager.enable = true;
 }
