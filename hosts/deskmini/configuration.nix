@@ -36,7 +36,7 @@
     ibus.engines = with pkgs.ibus-engines; [ libpinyin rime ];
   };
 
-  home-manager.users.razyang = import ../../users/razyang;
+  home-manager.users.razyang = import ../../users/razyang-graphic;
 
   system.stateVersion = "22.11"; # Did you read the comment?
 }

@@ -36,19 +36,16 @@
           modules = makeNixOSModules { inherit hostname system; };
         };
 
-      makeNixConfiguration = { username, system }:
-        inputs.home-manager.lib.homeManagerConfiguration {
+      makeNixConfiguration = { system }:
+        let
           pkgs = nixpkgs.legacyPackages.${system};
-          modules = [
-            {
-              home = {
-                inherit username;
-                homeDirectory = "/home/${username}";
-              };
-            }
-            (./users + "/${username}")
-          ];
-        };
+          users = builtins.attrNames (pkgs.lib.attrsets.filterAttrs (name: type: type == "directory" && name != "common") (builtins.readDir ./users ));
+        in
+        pkgs.lib.genAttrs users (user: home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [ ./users/${user} ];
+        });
+
     in {
       nixosConfigurations = {
         virtual = makeNixOSConfiguration {
@@ -60,15 +57,6 @@
           system = "x86_64-linux";
         };
       };
-      homeConfigurations = {
-	razyang = makeNixConfiguration {
-          username = "razyang";
-          system = "x86_64-linux";
-	};
-	root = makeNixConfiguration {
-          username = "root";
-          system = "x86_64-linux";
-	};
-      };
+      homeConfigurations = makeNixConfiguration { system = "x86_64-linux"; };
     };
 }
