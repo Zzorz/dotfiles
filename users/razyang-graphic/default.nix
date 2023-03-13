@@ -7,7 +7,6 @@
     ghidra-bin
     nitrogen
     google-chrome
-    gnome-nautilus
     feh
   ];
   home.pointerCursor = {
