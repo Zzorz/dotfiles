@@ -16,7 +16,6 @@
     file
     iperf3
     zsh
-    vim
     tmux
     jq
     git
