@@ -26,6 +26,7 @@
       };
     };
   };
+  programs.zsh.enable = true;
   programs.dconf.enable = true;
 
   i18n.supportedLocales = [ "zh_CN.UTF-8/UTF-8" "en_US.UTF-8/UTF-8" ];
