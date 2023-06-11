@@ -34,7 +34,14 @@
     };
   };
 
+  i18n.inputMethod.enabled = "fcitx5";
+  i18n.inputMethod.fcitx5.addons = with pkgs; [ fcitx5-rime ];
+
   xdg.enable = true;
+  xdg.userDirs = {
+    enable = true;
+    createDirectories = true;
+  };
 
   services.sxhkd.extraConfig = (builtins.readFile ./config/sxhkdrc);
   services.sxhkd.enable = true;
@@ -44,7 +51,6 @@
   };
 
   xsession.windowManager.bspwm.startupPrograms = [
-    "ibus-daemon -d"
     "xsetroot -cursor_name left_ptr"
     "nitrogen --restore"
   ];

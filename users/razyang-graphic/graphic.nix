@@ -69,7 +69,6 @@
   programs.fzf.enable = true;
 
   xsession.windowManager.bspwm.startupPrograms = [ 
-    "ibus-daemon -d"
     "xsetroot -cursor_name left_ptr"
     "nitrogen --restore"
   ];
