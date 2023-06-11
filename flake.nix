@@ -7,13 +7,9 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    doom = {
-      url = "github:nix-community/nix-doom-emacs";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-  outputs = { self, nixpkgs, home-manager, doom, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, ... }@inputs:
     let
       vars = { stateVersion = "23.05"; };
       makeNixOSModules = { hostname, system }: [
@@ -23,10 +19,9 @@
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            extraSpecialArgs = { inherit inputs vars; };
           };
         }
-        (./hosts + "/${hostname}" + /configuration.nix)
+        (./hosts + "/${hostname}" + /configuration.nix ) { }
       ];
       makeNixOSConfiguration = { hostname, system }:
         nixpkgs.lib.nixosSystem {

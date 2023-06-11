@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, lib, system, ... }:
 
 {
   nix = {
@@ -14,5 +14,7 @@
     settings.substituters =
       [ "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store" ];
   };
-  environment.systemPackages = with pkgs; [ ];
+  environment.systemPackages = [ 
+  ];
+
 }
