@@ -1,4 +1,4 @@
-{ config, pkgs, lib, nixpkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   nix = {
@@ -14,6 +14,5 @@
     settings.substituters =
       [ "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store" ];
   };
-  nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [ ];
 }

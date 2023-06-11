@@ -31,12 +31,6 @@
 
   i18n.supportedLocales = [ "zh_CN.UTF-8/UTF-8" "en_US.UTF-8/UTF-8" ];
 
-
-  i18n.inputMethod = {
-    enabled = "ibus";
-    ibus.engines = with pkgs.ibus-engines; [ libpinyin rime ];
-  };
-
   home-manager.users.razyang = import ../../users/razyang-graphic;
 
   system.stateVersion = "23.05"; # Did you read the comment?

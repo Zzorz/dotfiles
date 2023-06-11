@@ -7,13 +7,17 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    doom.url = "github:nix-community/nix-doom-emacs";
+    doom = {
+      url = "github:nix-community/nix-doom-emacs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, doom, ... }@inputs:
     let
       vars = { stateVersion = "23.05"; };
       makeNixOSModules = { hostname, system }: [
+        { nixpkgs.config.allowUnfree = true; }
         home-manager.nixosModules.home-manager
         {
           home-manager = {
@@ -32,12 +36,17 @@
 
       makeNixConfiguration = { system }:
         let
-          pkgs = nixpkgs.legacyPackages.${system};
+          pkgs = import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+          };
           users = builtins.attrNames (pkgs.lib.attrsets.filterAttrs (name: type: type == "directory" && name != "common") (builtins.readDir ./users ));
         in
         pkgs.lib.genAttrs users (user: home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = [ ./users/${user} ];
+          modules = [ 
+            ./users/${user} 
+          ];
         });
 
     in {
