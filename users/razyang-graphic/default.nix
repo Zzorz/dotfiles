@@ -7,6 +7,8 @@
     ghidra-bin
     nitrogen
     google-chrome
+    rofi
+    alacritty
     feh
   ];
   home.pointerCursor = {
@@ -35,6 +37,7 @@
   xdg.enable = true;
 
   services.sxhkd.extraConfig = (builtins.readFile ./config/sxhkdrc);
+  services.sxhkd.enable = true;
   services.picom = {
     enable = true;
     vSync = true;

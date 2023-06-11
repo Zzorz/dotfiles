@@ -20,6 +20,7 @@
     jq
     git
     zoxide
+    fzf
     tree
   ];
   programs.home-manager.enable = true;

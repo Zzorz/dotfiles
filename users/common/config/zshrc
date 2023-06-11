@@ -10,11 +10,11 @@ zinit light-mode wait lucid silent for \
         atload'_zsh_autosuggest_start' zpm-zsh/colorize
 
 zinit light-mode wait lucid silent is-snippet for \
-       	https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh \
-       	https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh \
         OMZ::plugins/urltools/urltools.plugin.zsh \
         PZT::modules/completion/init.zsh
 
+#https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh \
+#https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh \
 
 
 export FZF_CTRL_T_OPTS="--height 50% --preview '(bat --theme=TwoDark --style=numbers --color=always {} | head -n 500)' --bind 'ctrl-j:accept,ctrl-k:kill-line' --reverse"

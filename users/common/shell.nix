@@ -6,8 +6,10 @@
   };
   programs.starship.enable = true;
   programs.zoxide = { enable = true; enableZshIntegration = true; };
+  programs.fzf = { enable = true; enableZshIntegration = true; };
   programs.zsh = {
     enable = true;
+    completionInit = "";
     plugins = [{
       name = "zinit";
       file = "zinit.zsh";
@@ -21,5 +23,4 @@
     }];
     initExtra = (builtins.readFile ./config/zshrc);
   };
-  programs.fzf.enable = true;
 }
