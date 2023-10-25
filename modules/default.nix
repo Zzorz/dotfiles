@@ -12,7 +12,7 @@
       options = "--delete-older-than 30d";
     };
     settings.substituters =
-      [ "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store" ];
+      [ "https://mirror.sjtu.edu.cn/nix-channels/store" ];
   };
   environment.systemPackages = [ 
   ];

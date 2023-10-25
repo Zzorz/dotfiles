@@ -11,7 +11,7 @@
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
     let
-      vars = { stateVersion = "23.05"; };
+      vars = { stateVersion = "23.11"; };
       makeNixOSModules = { hostname, system }: [
         { nixpkgs.config.allowUnfree = true; }
         home-manager.nixosModules.home-manager
@@ -46,6 +46,10 @@
 
     in {
       nixosConfigurations = {
+        lxc = makeNixOSConfiguration {
+          hostname = "lxc";
+          system = "x86_64-linux";
+        };
         virtual = makeNixOSConfiguration {
           hostname = "virtual";
           system = "x86_64-linux";
