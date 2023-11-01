@@ -2,7 +2,14 @@ alias xclip='xclip -selection clipboard'
 
 bindkey -e
 
+zinit light-mode for \
+       	zdharma-continuum/zinit-annex-as-monitor \
+       	zdharma-continuum/zinit-annex-bin-gem-node \
+       	zdharma-continuum/zinit-annex-patch-dl \
+       	zdharma-continuum/zinit-annex-rust
+
 zinit light-mode wait lucid silent for \
+	z-shell/zsh-editing-workbench \
         zdharma/fast-syntax-highlighting \
         hlissner/zsh-autopair \
         ael-code/zsh-colored-man-pages \
@@ -20,3 +27,4 @@ zinit light-mode wait lucid silent is-snippet for \
 export FZF_CTRL_T_OPTS="--height 50% --preview '(bat --theme=TwoDark --style=numbers --color=always {} | head -n 500)' --bind 'ctrl-j:accept,ctrl-k:kill-line' --reverse"
 export FZF_ALT_C_OPTS="--height 50% --preview 'tree -C {} | head -200' --bind 'ctrl-j:accept,ctrl-k:kill-line' --reverse"
 export FZF_CTRL_R_OPTS="--height 50% --preview 'echo {}' --preview-window down:3:hidden:wrap --bind 'ctrl-j:accept,ctrl-k:kill-line' --reverse"
+source "$HOME/.cargo/env"

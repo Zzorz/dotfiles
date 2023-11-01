@@ -24,8 +24,16 @@
     initExtra = (builtins.readFile ./config/zshrc);
   };
 
-  programs.nnn = {
+
+  programs.atuin.enable = true;
+  programs.eza = {
     enable = true;
-    package = pkgs.nnn.override ({ withNerdIcons = true; });
+    enableAliases = true;
   };
+
+  programs.vim = {
+    enable = true;
+    plugins = with pkgs.vimPlugins; [ vim-visual-multi vim-nix ];
+  };
+
 }

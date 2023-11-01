@@ -1,7 +1,6 @@
 { pkgs, inputs, ... }: {
   imports = [
     ../common
-    ./vim.nix
   ];
   home.username = "razyang";
   home.homeDirectory = "/home/razyang";
@@ -13,6 +12,6 @@
   };
 
   home.packages = with pkgs; [
-    radare2
+    #podman
   ];
 }
