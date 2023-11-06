@@ -2,6 +2,8 @@ alias xclip='xclip -selection clipboard'
 
 bindkey -e
 
+zinit ice depth=1; zinit light romkatv/powerlevel10k
+
 zinit light-mode for \
        	zdharma-continuum/zinit-annex-as-monitor \
        	zdharma-continuum/zinit-annex-bin-gem-node \
@@ -28,3 +30,5 @@ export FZF_CTRL_T_OPTS="--height 50% --preview '(bat --theme=TwoDark --style=num
 export FZF_ALT_C_OPTS="--height 50% --preview 'tree -C {} | head -200' --bind 'ctrl-j:accept,ctrl-k:kill-line' --reverse"
 export FZF_CTRL_R_OPTS="--height 50% --preview 'echo {}' --preview-window down:3:hidden:wrap --bind 'ctrl-j:accept,ctrl-k:kill-line' --reverse"
 source "$HOME/.cargo/env"
+
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
