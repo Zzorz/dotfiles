@@ -26,7 +26,7 @@ in
         owner = "zdharma-continuum";
         repo = "zinit";
         rev = "v3.12.0";
-        sha256 = "c8651cc2bc0b5e9b01de7cc62136e2ff4c9c65e8f4f46be8cc3a2c7047fbaa9e";
+        sha256 = "02260ad694450f8086bc171083d4308058dce59e7ae13565596d0ccf1a317565";
       };
     }];
     initExtra = (builtins.readFile ./zshrc);
