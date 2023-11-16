@@ -1,7 +1,7 @@
 {inputs, ... }:
 {
   imports = [
-    ../.
+    ../../.
   ];
   home = {
     username = "root";

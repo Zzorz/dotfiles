@@ -1,5 +1,10 @@
 {inputs, ... }:
 {
-    username = "yangtiangang";
-    homeDirectory = "/home/yangtiangang";
+  imports = [
+    ../../.
+  ];
+  home = {
+    username = "razyang";
+    homeDirectory = "/home/razyang";
+  };
 }

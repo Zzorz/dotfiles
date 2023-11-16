@@ -2,56 +2,41 @@
   description = "RazYang's NixOS Flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
-    nix-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
     home-manager = {
-      url = "github:nix-community/home-manager/release-23.05";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    flake-utils.url = "github:numtide/flake-utils";
+
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+
   };
+
   nixConfig = {
-    extra-experimental-features = "nix-command flakes";
-    substituters = [ "https://mirror.sjtu.edu.cn/nix-channels/store" ];
+    #extra-experimental-features = "nix-command flakes";
+    #substituters = [ "https://mirror.sjtu.edu.cn/nix-channels/store" ];
   };
 
-  inputs = {
-    colmena = {
-      url = "github:zhaofengli/colmena";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        stable.follows = "nixpkgs";
-      };
-    };
-    nixago = { url = "github:nix-community/nixago"; inputs.nixpkgs.follows = "nixpkgs"; };
-    hive = { 
-      url = "github:divnix/hive";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        nixago.follows = "nixago";
-        colmena.follows = "colmena";
-      };
-    };
-    haumea.follows = "hive/std/haumea";
-    std.follows = "hive/std";
-    devshell = { url = "github:numtide/devshell"; inputs.nixpkgs.follows = "nixpkgs"; };
-  };
-  inputs = {
-    incl = { url = "github:divnix/incl"; inputs.nixlib.follows = "nixpkgs"; };
-  };
-
-  outputs = { self, hive, std, incl, ... } @ inputs: std.growOn {
-    inherit inputs;
-    nixpkgsConfig = { allowUnfree = true; };
-    systems = [ "x86_64-linux" ];
-    cellsFrom = ./cells;
-    cellBlocks = with std.blockTypes // hive.blockTypes; [
-      #nixosConfigurations 
-      homeConfigurations 
-      (functions "homeProfiles")
+  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs;} {
+    systems = ["x86_64-linux"];
+    imports = [
+      {
+        _module.args = rec {
+          stateVersion = "23.11";
+          system = "x86_64-linux";
+          pkgs = import inputs.nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+          };
+        };
+      }
+      ./home/profiles
     ];
-  } {
-     #nixosConfigurations = hive.collect self "nixosConfigurations";
-     homeConfigurations = hive.collect self "homeConfigurations";
   };
 }
