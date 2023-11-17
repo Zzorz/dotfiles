@@ -11,7 +11,7 @@ in
       userName = "RazYang";
       userEmail = "xzzorz@gmail.com";
     };
-      home-manager.enable = true;
+    home-manager.enable = true;
     tmux = {
       enable = true;
       plugins = with pkgs; [ tmuxPlugins.nord ];

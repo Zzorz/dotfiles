@@ -1,4 +1,4 @@
-{ self, inputs, stateVersion,pkgs, ... }:
+{ self, inputs, stateVersion, pkgs, ... }:
 let
   #pkgs = import inputs.nixpkgs { system = "x86_64-linux";};
   userProfiles = builtins.attrNames (pkgs.lib.attrsets.filterAttrs (name: type: type == "directory") (builtins.readDir ./. ));
@@ -11,7 +11,15 @@ in
       modules = [
         ./${user}
       ];
-      extraSpecialArgs = { inherit inputs stateVersion; };
+      extraSpecialArgs = { inherit inputs stateVersion pkgs; };
     });
+#      inputs.home-manager.lib.homeManagerConfiguration {
+#      inherit pkgs;
+#      modules = [
+#        ./${user}
+#      ];
+#      extraSpecialArgs = { inherit inputs stateVersion pkgs; };
+#    });
+
   };
 }
