@@ -13,7 +13,6 @@
   boot.loader.grub.useOSProber = true;
 
   networking = {
-    firewall.enable = false;
     resolvconf.enable = false;
     hostName = "playground"; 
     nameservers = [ "172.16.0.2" ];
@@ -38,7 +37,9 @@
     shell = pkgs.zsh;
   };
   home-manager.users.razyang = import ../../../home/profiles/razyang {inherit inputs pkgs stateVersion;};
-  #razyang {};
-  #home-manager.users.razyang = ;
+  environment.defaultPackages = with pkgs; [
+    nixos-generators
+  ];
+
 
 }

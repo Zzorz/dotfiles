@@ -18,12 +18,18 @@
   };
   time.timeZone = "Asia/Shanghai";
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    vim
     wget
     git
+    tree
+    rsync
   ];
   programs.zsh.enable = true;
-  services.openssh.enable = true;
+  networking.firewall.enable = false;
+  services.openssh = {
+    enable = true;
+    settings.PermitRootLogin = "yes";
+  };
   users.users.root.shell = pkgs.zsh;
   home-manager.users.root = import ../home/profiles/root {inherit inputs pkgs stateVersion;};
   system.stateVersion = stateVersion;

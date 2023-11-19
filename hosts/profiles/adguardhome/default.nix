@@ -1,18 +1,31 @@
-{ self, inputs, pkgs, stateVersion, ... }@args:
+{ self, inputs, pkgs, stateVersion, modulesPath, ... }@args:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      (import ../../. (args))
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    (import ../../. (args))
+    (modulesPath + "/virtualisation/proxmox-lxc.nix")
+  ];
 
-  # Bootloader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
-  boot.loader.grub.useOSProber = true;
+  nixpkgs.hostPlatform = pkgs.lib.mkDefault "x86_64-linux";
+
+  #(modulesPath + "/profiles/docker-container.nix")
+  boot.isContainer = true;
+  #boot.loader.grub.enable = false;
+  #boot.loader.grub.device = "/dev/sda";
+  #boot.loader.grub.useOSProber = true;
 
   networking.hostName = "adguardhome"; 
+  services = {
+    adguardhome.enable = true;
+    resolved = {
+      enable = true;
+      llmnr = "false";
+      extraConfig = ''
+        DNSStubListener=no
+        MulticastDNS=false
+      '';
+    };
+  };
 
   users.users.razyang = {
     isNormalUser = true;
