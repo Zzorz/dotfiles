@@ -6,8 +6,8 @@ sh <(curl -L https://nixos.org/nix/install) --daemon
 echo 'extra-experimental-features = nix-command flakes' >> /etc/nix/nix.conf
 ```
 ``` bash
-nix run 'github:zzorz/dotfiles#homeConfigurations.nix-root.activationPackage'
+nix run "github:zzorz/dotfiles#homeConfigurations.$(whoami).activationPackage"
 ```
 ``` bash
-home-manager switch --flake 'github:zzorz/dotfiles#nix-root'
+home-manager switch --flake "github:zzorz/dotfiles#$(whoami)"
 ```
