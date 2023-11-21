@@ -1,8 +1,12 @@
-{ inputs, stateVersion, pkgs, ... }:
+{ inputs, stateVersion, pkgs, ... }@args:
 let 
   #pkgs = import inputs.nixpkgs { inherit system };
 in
 {
+  imports = [
+    (import ./neovim.nix (args))
+  ];
+             
   home = {
     inherit stateVersion;
   };
@@ -40,10 +44,6 @@ in
     eza = {
       enable = true;
       enableAliases = true;
-    };
-    vim = {
-      enable = true;
-      plugins = with pkgs.vimPlugins; [ vim-visual-multi vim-nix ];
     };
   };
 
