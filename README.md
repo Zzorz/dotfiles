@@ -1,3 +1,5 @@
+# Dotfiles
+Razyang's dotfiles managed by nix and nixos.
 # Show what's supported
 ``` bash
 nix flake show "github:zzorz/dotfiles"
