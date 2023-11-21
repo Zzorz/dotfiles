@@ -1,4 +1,4 @@
-{inputs, pkgs, ...}:
+{pkgs, ...}:
 {
   programs.neovim = {
     enable = true;
@@ -41,12 +41,12 @@
           };
         };
       };
-      extraLuaConfig = ''
-        ${"\n"}-- Configure coc
-	require('coc_config')
-	require('telescope_config')
-      '';
     };
+    #extraLuaConfig = ''
+    #  ${"\n"}-- Configure coc
+    #  require('coc_config')
+    #  require('telescope_config')
+    #'';
   };
 }
 
