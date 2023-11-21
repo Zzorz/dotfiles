@@ -1,4 +1,5 @@
 # Installation
+## for non nixos host
 ``` bash
 sh <(curl -L https://nixos.org/nix/install) --daemon
 ```
@@ -10,4 +11,8 @@ nix run "github:zzorz/dotfiles#homeConfigurations.$(whoami).activationPackage"
 ```
 ``` bash
 home-manager switch --flake "github:zzorz/dotfiles#$(whoami)"
+```
+## for nixos
+``` bash
+nixos-rebuild switch --flake "github:zzorz/dotfiles#$(hostname)"
 ```
