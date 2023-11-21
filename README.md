@@ -1,3 +1,8 @@
+# Show what's supported
+``` bash
+nix flake show "github:zzorz/dotfiles"
+```
+or using `nix repl`, `:lf` function.
 # Installation
 ## for non nixos host
 ``` bash
