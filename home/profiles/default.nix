@@ -1,6 +1,5 @@
-{ self, inputs, stateVersion, pkgs, ... }:
+{ inputs, stateVersion, pkgs, ... }:
 let
-  #pkgs = import inputs.nixpkgs { system = "x86_64-linux";};
   userProfiles = builtins.attrNames (pkgs.lib.attrsets.filterAttrs (name: type: type == "directory") (builtins.readDir ./. ));
 in
 {
