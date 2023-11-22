@@ -8,11 +8,7 @@
     defaultEditor = true;
 
     plugins = with pkgs.vimPlugins; [
-      catppuccin-nvim
       coc-clangd
-      coc-pyright
-      ctrlp
-      neodev-nvim
       nvim-treesitter.withAllGrammars
       surround
       telescope-nvim
@@ -22,13 +18,13 @@
     coc = {
       enable = true;
       settings = {
-        languageserver = {
+       languageserver = {
           nix = {
             command = "${pkgs.nil}/bin/nil";
             filetypes = [ "nix" ];
             rootPatterns = [ "flake.nix" ];
             settings = {
-              nil = {
+             nil = {
                 formatting = { command = [ "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt" ]; };
               };
             };
@@ -42,12 +38,14 @@
         };
       };
     };
-    #extraLuaConfig = ''
-    #  ${"\n"}-- Configure coc
-    #  require('coc_config')
-    #  require('telescope_config')
-    #'';
+    extraConfig = ''
+    set relativenumber
+    nnoremap ff <cmd>Telescope find_files<cr>
+    nnoremap fg <cmd>Telescope live_grep<cr>
+    nnoremap fb <cmd>Telescope buffers<cr>
+    nnoremap fc <cmd>Telescope commands<cr>
+    '';
+    extraLuaConfig = ''
+    '';
   };
 }
-
-

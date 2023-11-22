@@ -1,7 +1,4 @@
-{ inputs, stateVersion, pkgs, ... }@args:
-let 
-  #pkgs = import inputs.nixpkgs { inherit system };
-in
+{ stateVersion, pkgs, ... }@args:
 {
   imports = [
     (import ./neovim.nix (args))
@@ -18,7 +15,9 @@ in
     home-manager.enable = true;
     tmux = {
       enable = true;
-      plugins = with pkgs; [ tmuxPlugins.nord ];
+      plugins = with pkgs; [
+        tmuxPlugins.nord 
+      ];
       extraConfig = (builtins.readFile ./tmux.conf);
     };
     #starship.enable = true;
