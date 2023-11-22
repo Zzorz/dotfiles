@@ -1,8 +1,4 @@
-alias xclip='xclip -selection clipboard'
-
 bindkey -e
-
-zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 zinit light-mode for \
        	zdharma-continuum/zinit-annex-as-monitor \
@@ -22,13 +18,4 @@ zinit light-mode wait lucid silent is-snippet for \
         OMZ::plugins/urltools/urltools.plugin.zsh \
         PZT::modules/completion/init.zsh
 
-#https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh \
-#https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh \
-
-
-export FZF_CTRL_T_OPTS="--height 50% --preview '(bat --theme=TwoDark --style=numbers --color=always {} | head -n 500)' --bind 'ctrl-j:accept,ctrl-k:kill-line' --reverse"
-export FZF_ALT_C_OPTS="--height 50% --preview 'tree -C {} | head -200' --bind 'ctrl-j:accept,ctrl-k:kill-line' --reverse"
-export FZF_CTRL_R_OPTS="--height 50% --preview 'echo {}' --preview-window down:3:hidden:wrap --bind 'ctrl-j:accept,ctrl-k:kill-line' --reverse"
-
 [[ ! -f "$HOME/.cargo/env" ]] || source "$HOME/.cargo/env"
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

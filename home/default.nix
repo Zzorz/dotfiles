@@ -25,25 +25,34 @@
     fzf = { enable = true; enableZshIntegration = true; };
     zsh = {
       enable = true;
+      enableAutosuggestions = true;
+      defaultKeymap = "emacs";
+      antidote = {
+        enable = true;
+	plugins = [
+	  "z-shell/zsh-editing-workbench"
+	  "hlissner/zsh-autopair"
+	  "ael-code/zsh-colored-man-pages"
+	  "zpm-zsh/colorize"
+	];
+      };
       completionInit = "";
-      plugins = [{
-        name = "zinit";
-        file = "zinit.zsh";
-        src = pkgs.fetchFromGitHub {
-          owner = "zdharma-continuum";
-          repo = "zinit";
-          rev = "v3.12.0";
-          sha256 = "02260ad694450f8086bc171083d4308058dce59e7ae13565596d0ccf1a317565";
-        };
-      }];
-      initExtra = (builtins.readFile ./zshrc);
+      #initExtra = (builtins.readFile ./zshrc);
     };
-
+    oh-my-posh = {
+      enable = true;
+      useTheme = "emodipt-extend";
+    };
     atuin.enable = true;
-    eza = {
+    navi.enable = true;
+    nix-index.enable = true;
+    ripgrep.enable = true;
+    broot.enable = true;
+    #carapace.enable = true;
+    #helix.enable = true;
+    lsd = {
       enable = true;
       enableAliases = true;
     };
   };
-
 }
