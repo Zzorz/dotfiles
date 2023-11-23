@@ -2,6 +2,7 @@
 {
   imports = [
     (import ./neovim.nix (args))
+    #(import ./doom-emacs (args))
   ];
              
   home = {
@@ -53,7 +54,7 @@
     broot.enable = true;
     bottom.enable = true;
     #carapace.enable = true;
-    #helix.enable = true;
+    helix.enable = true;
     lsd = {
       enable = true;
       enableAliases = true;
