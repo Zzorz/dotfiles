@@ -26,18 +26,21 @@
     zsh = {
       enable = true;
       enableAutosuggestions = true;
+      enableCompletion = true;
       defaultKeymap = "emacs";
       antidote = {
         enable = true;
 	plugins = [
-	  "z-shell/zsh-editing-workbench"
-	  "hlissner/zsh-autopair"
-	  "ael-code/zsh-colored-man-pages"
-	  "zpm-zsh/colorize"
+	  "zdharma-continuum/fast-syntax-highlighting"
+	  "sorin-ionescu/prezto path:modules/completion kind:defer"
+	  "hlissner/zsh-autopair kind:defer"
+	  "ael-code/zsh-colored-man-pages kind:defer"
 	];
       };
       completionInit = "";
-      #initExtra = (builtins.readFile ./zshrc);
+      initExtra = ''
+        [[ ! -f "$HOME/.cargo/env" ]] || source "$HOME/.cargo/env"
+      '';
     };
     oh-my-posh = {
       enable = true;
@@ -45,9 +48,10 @@
     };
     atuin.enable = true;
     navi.enable = true;
-    nix-index.enable = true;
+    #nix-index.enable = true;
     ripgrep.enable = true;
     broot.enable = true;
+    bottom.enable = true;
     #carapace.enable = true;
     #helix.enable = true;
     lsd = {
