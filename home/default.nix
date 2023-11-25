@@ -32,21 +32,34 @@
       antidote = {
         enable = true;
 	plugins = [
+	  "romkatv/powerlevel10k"
+	  "z-shell/zsh-editing-workbench"
 	  "zdharma-continuum/fast-syntax-highlighting"
 	  "sorin-ionescu/prezto path:modules/completion kind:defer"
 	  "hlissner/zsh-autopair kind:defer"
-	  "ael-code/zsh-colored-man-pages kind:defer"
+	  "ohmyzsh/ohmyzsh path:lib"
+	  "ohmyzsh/ohmyzsh path:plugins/colored-man-pages"
 	];
       };
       completionInit = "";
+      initExtraFirst = ''
+        # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+        # Initialization code that may require console input (password prompts, [y/n]
+        # confirmations, etc.) must go above this block; everything else may go below.
+        if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
+          source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
+        fi
+      '';
       initExtra = ''
-        [[ ! -f "$HOME/.cargo/env" ]] || source "$HOME/.cargo/env"
+        [[ ! -f "~/.cargo/env" ]] || source "~/.cargo/env"
+        [[ ! -f "~/.zsh_extra" ]] || source "~/.zsh_extra"
+	[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
       '';
     };
-    oh-my-posh = {
-      enable = true;
-      useTheme = "emodipt-extend";
-    };
+    #oh-my-posh = {
+    #  enable = true;
+    #  useTheme = "emodipt-extend";
+    #};
     atuin.enable = true;
     navi.enable = true;
     #nix-index.enable = true;
