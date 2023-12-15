@@ -8,6 +8,7 @@
   home = {
     inherit stateVersion;
     packages = with pkgs;[
+      file
       ncdu
     ];
   };
