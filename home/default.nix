@@ -7,6 +7,9 @@
              
   home = {
     inherit stateVersion;
+    packages = with pkgs;[
+      ncdu
+    ];
   };
   programs = {
     git = {
