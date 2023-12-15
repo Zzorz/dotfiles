@@ -11,7 +11,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    flake-utils.url = "github:numtide/flake-utils";
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+    };
 
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
@@ -24,7 +26,10 @@
       inputs.flake-utils.follows = "flake-utils";
     };
 
-    nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
+    #nix-doom-emacs = {
+    #  url = "github:nix-community/nix-doom-emacs";
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #}
 
   };
 
@@ -43,6 +48,7 @@
           pkgs = import inputs.nixpkgs {
             inherit system;
             config.allowUnfree = true;
+            #config.contentAddressedByDefault = true;
           };
         };
       }
