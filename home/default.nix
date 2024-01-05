@@ -9,10 +9,13 @@
     inherit stateVersion;
     packages = with pkgs;[
       file
-      ncdu
+      du-dust
+      fd
+      vivid
     ];
   };
   programs = {
+    pyenv.enable = true;
     git = {
       userName = "RazYang";
       userEmail = "xzzorz@gmail.com";
@@ -21,7 +24,7 @@
     tmux = {
       enable = true;
       plugins = with pkgs; [
-        tmuxPlugins.nord 
+        tmuxPlugins.gruvbox
       ];
       extraConfig = (builtins.readFile ./tmux.conf);
     };
@@ -57,6 +60,7 @@
         [[ ! -f ~/.cargo/env ]] || source ~/.cargo/env
         [[ ! -f ~/.zsh_extra ]] || source ~/.zsh_extra
 	[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+	export LS_COLORS="$(vivid generate gruvbox-dark)"
       '';
     };
     #oh-my-posh = {

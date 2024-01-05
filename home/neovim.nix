@@ -10,10 +10,14 @@
     plugins = with pkgs.vimPlugins; [
       coc-clangd
       nvim-treesitter.withAllGrammars
-      surround
+      nvim-surround
       telescope-nvim
       vim-airline
       which-key-nvim
+      gruvbox-nvim
+      indent-blankline-nvim
+      vim-sneak
+      quick-scope
     ];
     coc = {
       enable = true;
@@ -40,12 +44,20 @@
     };
     extraConfig = ''
     set relativenumber
-    nnoremap ff <cmd>Telescope find_files<cr>
-    nnoremap fg <cmd>Telescope live_grep<cr>
-    nnoremap fb <cmd>Telescope buffers<cr>
-    nnoremap fc <cmd>Telescope commands<cr>
+    nnoremap ,f <cmd>Telescope find_files<cr>
+    nnoremap ,g <cmd>Telescope live_grep<cr>
+    nnoremap ,b <cmd>Telescope buffers<cr>
+    nnoremap ,c <cmd>Telescope commands<cr>
+    let g:qs_highlight_on_keys = ['f', 'F']
+
+    let g:indent_guides_enable_on_vim_startup = 1
+    let g:airline#extensions#tabline#enabled = 1
+    let g:sneak#label = 1
     '';
     extraLuaConfig = ''
+    vim.o.background = "dark"
+    vim.cmd([[colorscheme gruvbox]])
+    require("ibl").setup()
     '';
   };
 }
