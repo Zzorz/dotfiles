@@ -12,6 +12,7 @@
       du-dust
       fd
       vivid
+      emacs-nox
     ];
   };
   programs = {
