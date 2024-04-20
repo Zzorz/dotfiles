@@ -16,6 +16,27 @@
 
   networking.hostName = "fileserver"; 
   services = {
+    redis = {
+      servers = {
+        "" = {
+	  enable=true;
+	  bind = null;
+	};
+      };
+    };
+    postgresql = {
+      enable = true;
+      ensureDatabases = ["bitmagnet"];
+      dataDir = "/srv/storage/pgsql";
+      enableTCPIP = true;
+      port = 5432;
+        authentication = pkgs.lib.mkOverride 10 ''
+    local all      all                          trust
+    host  all      all     172.16.0.1/16   trust
+    host  all      all     127.16.0.1/32   trust
+    host all       all     ::1/128        trust
+  '';
+    };
     nfs.server = {
       enable = true;
       exports = ''
@@ -41,6 +62,9 @@
         DNSStubListener=no
         MulticastDNS=false
       '';
+      fallbackDns = [
+        "172.16.0.2"
+      ];
     };
   };
 
