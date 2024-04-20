@@ -3,39 +3,27 @@
 
   inputs = {
     nixpkgs = {
-      url = "github:nixos/nixpkgs/nixos-unstable";
+      url = "git+https://mirrors.cernet.edu.cn/nixpkgs.git?submodules=1&shallow=1&ref=nixos-unstable";
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "git+https://github.com/nix-community/home-manager?submodules=1&shallow=1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    flake-utils = {
-      url = "github:numtide/flake-utils";
+    nixpkgs-lib = {
+      url = "git+https://mirrors.cernet.edu.cn/nixpkgs.git?submodules=1&shallow=1&ref=nixos-unstable&dir=lib";
     };
 
     flake-parts = {
-      url = "github:hercules-ci/flake-parts";
-      inputs.nixpkgs-lib.follows = "nixpkgs";
+      url = "git+https://github.com/hercules-ci/flake-parts?submodules=1&shallow=1";
+      inputs.nixpkgs-lib.follows = "nixpkgs-lib";
     };
-
-    nil = {
-      url = "github:oxalica/nil";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
-    };
-
-    #nix-doom-emacs = {
-    #  url = "github:nix-community/nix-doom-emacs";
-    #  inputs.nixpkgs.follows = "nixpkgs";
-    #}
-
   };
 
   nixConfig = {
-    #extra-experimental-features = "nix-command flakes";
-    #substituters = [ "https://mirror.sjtu.edu.cn/nix-channels/store" ];
+    extra-experimental-features = "nix-command flakes";
+    substituters = [ "https://mirrors.cernet.edu.cn/nix-channels/store" "https://cache.nixos.org" "https://nix-community.cachix.org" ];
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs;} {

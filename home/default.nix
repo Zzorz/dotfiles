@@ -13,6 +13,8 @@
       fd
       vivid
       emacs-nox
+      stdmanpages
+      man-pages-posix
     ];
   };
   programs = {
@@ -68,6 +70,7 @@
 	  "z-shell/zsh-editing-workbench"
 	  "sorin-ionescu/prezto path:modules/completion"
 	  "hlissner/zsh-autopair kind:defer"
+	  "ael-code/zsh-colored-man-pages"
 	];
       };
       completionInit = "";
