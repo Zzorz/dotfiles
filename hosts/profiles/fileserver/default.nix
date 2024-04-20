@@ -29,7 +29,7 @@
       ensureDatabases = ["bitmagnet"];
       dataDir = "/srv/storage/pgsql";
       enableTCPIP = true;
-      port = 5432;
+      settings.port = 5432;
         authentication = pkgs.lib.mkOverride 10 ''
     local all      all                          trust
     host  all      all     172.16.0.1/16   trust
