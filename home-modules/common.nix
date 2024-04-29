@@ -8,35 +8,34 @@
       userEmail = "xzzorz@gmail.com";
     };
     home-manager.enable = true;
-    zellij = {
-      enable = true;
-      enableBashIntegration = false;
-      settings = {
-        pane_frames = false;
-        theme = "gruvbox-dark";
-        themes = {
-          gruvbox-dark = {
-            fg = [ 213 196 161 ];
-            bg = [ 40 40 40 ];
-            black = [ 60 56 54 ];
-            red = [ 204 36 29 ];
-            green = [ 152 151 26 ];
-            yellow = [ 215 153 33 ];
-            blue = [ 69 133 136 ];
-            magenta = [ 177 98 134 ];
-            cyan = [ 104 157 106 ];
-            white = [ 251 241 199 ];
-            orange = [ 214 93 14 ];
-          };
-        };
-      };
-    };
     tmux = {
       enable = true;
-      plugins = with pkgs; [
-        tmuxPlugins.gruvbox
+      escapeTime = 0;
+      baseIndex = 1;
+      historyLimit = 5000;
+      keyMode = "vi";
+      prefix = "C-q";
+      terminal = "tmux-256color";
+      plugins = with pkgs.tmuxPlugins; [
+        #gruvbox
+        catppuccin
       ];
-      extraConfig = (builtins.readFile ./tmux.conf);
+      extraConfig = ''
+      unbind '"'
+      unbind %
+      bind h split-window -h
+      bind v split-window -v
+      bind -n M-a select-pane -L
+      bind -n M-d select-pane -R
+      bind -n M-w select-pane -U
+      bind -n M-s select-pane -D
+      set-option -g status-position top
+      bind-key -T copy-mode-vi v send-keys -X begin-selection
+      bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+      set -g @catppuccin_directory_text "#{pane_current_path}"
+      set -g @catppuccin_date_time_text "%H:%M:%S"
+      set -g @catppuccin_status_modules_right "session application directory user host date_time"
+      '';
     };
     #starship.enable = true;
     zoxide = { enable = true; enableZshIntegration = true; };
