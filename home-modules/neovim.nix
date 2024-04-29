@@ -21,6 +21,7 @@
       coc-snippets
       coc-diagnostic
       coc-rust-analyzer
+      nerdcommenter
       nvim-treesitter.withAllGrammars
       nvim-treesitter-refactor
       nvim-treesitter-textobjects

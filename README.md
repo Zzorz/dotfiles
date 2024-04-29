@@ -1,25 +1,37 @@
 # Dotfiles
+
 Razyang's dotfiles managed by nix and nixos.
+
 # Show what's supported
-``` bash
+
+```bash
 nix flake show "github:zzorz/dotfiles"
 ```
+
 or using `nix repl`, `:lf` function.
+
 # Installation
+
 ## for non nixos host
-``` bash
+
+```bash
 sh <(curl -L https://nixos.org/nix/install) --daemon
 ```
-``` bash
+
+```bash
 echo 'extra-experimental-features = nix-command flakes' >> /etc/nix/nix.conf
 ```
-``` bash
+
+```bash
 nix run "github:zzorz/dotfiles#homeConfigurations.$(whoami).activationPackage"
 ```
-``` bash
+
+```bash
 home-manager switch --flake "github:zzorz/dotfiles#$(whoami)"
 ```
+
 ## for nixos
-``` bash
+
+```bash
 nixos-rebuild switch --flake "github:zzorz/dotfiles#$(hostname)"
 ```

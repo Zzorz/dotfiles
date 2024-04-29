@@ -42,24 +42,4 @@
         nixosConfigurations = [ "nixos-configurations" ];
       };
     };
-
-
-  #outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs;} {
-  #  systems = ["x86_64-linux"];
-  #  imports = [
-  #    {
-  #      _module.args = rec {
-  #        stateVersion = "23.11";
-  #        system = "x86_64-linux";
-  #        pkgs = import inputs.nixpkgs {
-  #          inherit system;
-  #          config.allowUnfree = true;
-  #          #config.contentAddressedByDefault = true;
-  #        };
-  #      };
-  #    }
-  #    ./home/profiles
-  #    ./hosts/profiles
-  #  ];
-  #};
 }
