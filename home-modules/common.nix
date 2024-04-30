@@ -1,6 +1,9 @@
 { pkgs, inputs, ... }:
 {
-  imports = with inputs.self.homeModules; [ zsh neovim ];
+  imports = with inputs.self.homeModules; [
+    zsh
+    neovim
+  ];
   programs = {
     pyenv.enable = true;
     git = {
@@ -17,24 +20,20 @@
       prefix = "C-q";
       terminal = "tmux-256color";
       plugins = with pkgs.tmuxPlugins; [
-        #gruvbox
-        catppuccin
+        gruvbox
       ];
       extraConfig = ''
-      unbind '"'
-      unbind %
-      bind h split-window -h
-      bind v split-window -v
-      bind -n M-a select-pane -L
-      bind -n M-d select-pane -R
-      bind -n M-w select-pane -U
-      bind -n M-s select-pane -D
-      set-option -g status-position top
-      bind-key -T copy-mode-vi v send-keys -X begin-selection
-      bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
-      set -g @catppuccin_directory_text "#{pane_current_path}"
-      set -g @catppuccin_date_time_text "%H:%M:%S"
-      set -g @catppuccin_status_modules_right "session application directory user host date_time"
+        unbind '"'
+        unbind %
+        bind h split-window -h
+        bind v split-window -v
+        bind -n M-a select-pane -L
+        bind -n M-d select-pane -R
+        bind -n M-w select-pane -U
+        bind -n M-s select-pane -D
+        set-option -g status-position top
+        bind-key -T copy-mode-vi v send-keys -X begin-selection
+        bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
       '';
     };
     #starship.enable = true;
