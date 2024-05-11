@@ -1,19 +1,23 @@
 { pkgs, ... }:
 {
+  programs.carapace.enable = true;
   programs.zsh = {
     enable = true;
     autosuggestion.enable = true;
     enableCompletion = true;
-    syntaxHighlighting.enable = true;
+    #syntaxHighlighting.enable = true;
     defaultKeymap = "emacs";
     antidote = {
       enable = true;
       plugins = [
+        "zdharma/fast-syntax-highlighting"
         "romkatv/powerlevel10k"
         "z-shell/zsh-editing-workbench"
         "sorin-ionescu/prezto path:modules/completion"
         "hlissner/zsh-autopair kind:defer"
-        "ael-code/zsh-colored-man-pages"
+        "sunlei/zsh-ssh"
+        "chriskempson/base16-shell"
+        "robbyrussell/oh-my-zsh path:plugins/colored-man-pages"
       ];
     };
     completionInit = "";
@@ -25,6 +29,7 @@
       if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
         source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
       fi
+      autoload -Uz compinit && compinit
     '';
     initExtra = ''
       [[ ! -f ~/.cargo/env ]] || source ~/.cargo/env

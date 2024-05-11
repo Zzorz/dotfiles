@@ -7,10 +7,10 @@
         ]
       },
       "locked": {
-        "lastModified": 1713789128,
-        "narHash": "sha256-GU+mNIu3raRFGxmFYj3KmltiYJhaLvbnBHkpeORWYMY=",
+        "lastModified": 1714998740,
+        "narHash": "sha256-xPlzn9tO1QAGiPEIBRK1M/HvTjg1iGfBqi9FLwaBXdQ=",
         "ref": "refs/heads/master",
-        "rev": "796777410b196cc6a9635472a1fe1f71f6672b96",
+        "rev": "f132fc1409ba319458ebd93a1511b7b5bb750a5b",
         "shallow": true,
         "submodules": true,
         "type": "git",
@@ -30,10 +30,10 @@
         ]
       },
       "locked": {
-        "lastModified": 1714203603,
-        "narHash": "sha256-eT7DENhYy7EPLOqHI9zkIMD9RvMCXcqh6gGqOK5BWYQ=",
+        "lastModified": 1715077503,
+        "narHash": "sha256-AfHQshzLQfUqk/efMtdebHaQHqVntCMjhymQzVFLes0=",
         "ref": "refs/heads/master",
-        "rev": "c1609d584a6b5e9e6a02010f51bd368cb4782f8e",
+        "rev": "6e277d9566de9976f47228dd8c580b97488734d4",
         "shallow": true,
         "submodules": true,
         "type": "git",
@@ -48,10 +48,10 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1714076141,
-        "narHash": "sha256-Drmja/f5MRHZCskS6mvzFqxEaZMeciScCTFxWVLqWEY=",
+        "lastModified": 1715087517,
+        "narHash": "sha256-CLU5Tsg24Ke4+7sH8azHWXKd0CFd4mhLWfhYgUiDBpQ=",
         "ref": "nixos-unstable",
-        "rev": "7bb2ccd8cdc44c91edba16c48d2c8f331fb3d856",
+        "rev": "b211b392b8486ee79df6cdfb1157ad2133427a29",
         "shallow": true,
         "submodules": true,
         "type": "git",
@@ -68,10 +68,10 @@
     "nixpkgs-lib": {
       "locked": {
         "dir": "lib",
-        "lastModified": 1714076141,
-        "narHash": "sha256-Drmja/f5MRHZCskS6mvzFqxEaZMeciScCTFxWVLqWEY=",
+        "lastModified": 1715087517,
+        "narHash": "sha256-CLU5Tsg24Ke4+7sH8azHWXKd0CFd4mhLWfhYgUiDBpQ=",
         "ref": "nixos-unstable",
-        "rev": "7bb2ccd8cdc44c91edba16c48d2c8f331fb3d856",
+        "rev": "b211b392b8486ee79df6cdfb1157ad2133427a29",
         "shallow": true,
         "submodules": true,
         "type": "git",

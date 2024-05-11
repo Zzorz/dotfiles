@@ -35,7 +35,12 @@
     flakelight ./. {
       inherit inputs;
       nixDir = ./.;
+      nixpkgs.config = {
+        allowUnfree = true;
+      };
       nixDirAliases = {
+        packages = [ "packages" ];
+        devShells = [ "dev-shells" ];
         homeModules = [ "home-modules" ];
         nixosModules = [ "nixos-modules" ];
         homeConfigurations = [ "home-configurations" ];
