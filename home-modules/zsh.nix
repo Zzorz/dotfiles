@@ -5,20 +5,10 @@
     enable = true;
     autosuggestion.enable = true;
     enableCompletion = true;
-    #syntaxHighlighting.enable = true;
-    defaultKeymap = "emacs";
-    antidote = {
+    syntaxHighlighting.enable = true;
+    prezto = {
       enable = true;
-      plugins = [
-        "zdharma/fast-syntax-highlighting"
-        "romkatv/powerlevel10k"
-        "z-shell/zsh-editing-workbench"
-        "sorin-ionescu/prezto path:modules/completion"
-        "hlissner/zsh-autopair kind:defer"
-        "sunlei/zsh-ssh"
-        "chriskempson/base16-shell"
-        "robbyrussell/oh-my-zsh path:plugins/colored-man-pages"
-      ];
+      prompt.theme = "powerlevel10k";
     };
     completionInit = "";
     initExtraFirst = ''
