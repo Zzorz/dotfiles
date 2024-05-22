@@ -120,6 +120,12 @@
               name = "buffer",
               b = {"<cmd>Telescope buffers<cr>", "switch Buffer"},
               s = {"<cmd>Telescope current_buffer_fuzzy_find<cr>", "search in current Buffer"},
+              f = {"<cmd>Format<cr>", "format current Buffer"},
+            },
+            m = {
+              name = "multi cursor",
+              a = {"<Plug>(VM-Select-All)<Tab>", "Select All"},
+              r = {"<Plug>(VM-Start-Regex-Search)", "Start Regex Search"},
             },
             ["<space>"] = {
               name = "easymotion",
@@ -140,6 +146,38 @@
     extraLuaConfig = ''
       vim.o.background = "dark"
       vim.cmd([[colorscheme gruvbox]])
+      vim.opt.backup = false
+      vim.opt.writebackup = false
+      vim.opt.updatetime = 300
+      vim.opt.signcolumn = "yes"
+
+      function _G.check_back_space()
+        local col = vim.fn.col('.') - 1
+        return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
+      end
+
+      vim.api.nvim_create_augroup("CocGroup", {})
+      vim.api.nvim_create_autocmd("CursorHold", {
+        group = "CocGroup",
+        command = "silent call CocActionAsync('highlight')",
+        desc = "Highlight symbol under cursor on CursorHold"
+      })
+
+      local opts = {silent = true, noremap = true, expr = true, replace_keycodes = false}
+      vim.keymap.set("n", "<leader>rn", "<Plug>(coc-rename)", {silent = true})
+      vim.keymap.set("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', opts)
+      vim.keymap.set("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(2) : "\<C-h>"]], opts)
+      vim.keymap.set("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], opts)
+      vim.keymap.set("i", "<c-j>", "<Plug>(coc-snippets-expand-jump)")
+      vim.keymap.set("i", "<c-space>", "coc#refresh()", {silent = true, expr = true})
+      vim.keymap.set("n", "[g", "<Plug>(coc-diagnostic-prev)", {silent = true})
+      vim.keymap.set("n", "]g", "<Plug>(coc-diagnostic-next)", {silent = true})
+      vim.keymap.set("n", "gd", "<Plug>(coc-definition)", {silent = true})
+      vim.keymap.set("n", "gy", "<Plug>(coc-type-definition)", {silent = true})
+      vim.keymap.set("n", "gi", "<Plug>(coc-implementation)", {silent = true})
+      vim.keymap.set("n", "gr", "<Plug>(coc-references)", {silent = true})
+
+      vim.api.nvim_create_user_command("Format", "call CocAction('format')", {})
     '';
   };
 }
