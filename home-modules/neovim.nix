@@ -29,13 +29,29 @@
       nvim-treesitter-textobjects
       nvim-treesitter-context
       vim-airline
-      gruvbox-nvim
       quick-scope
       copilot-vim
       vim-visual-multi
       editorconfig-vim
+      {
+        plugin = base16-nvim;
+        type = "lua";
+        config = ''
+          vim.opt.termguicolors = true
+          require('base16-colorscheme').with_config({
+            telescope = true,
+            indentblankline = true,
+            notify = true,
+            ts_rainbow = true,
+            cmp = true,
+            illuminate = true,
+            dapui = true,
+          })
+          vim.cmd('colorscheme base16-gruvbox-dark-pale')
+        '';
+      }
 
-      { 
+      {
         plugin = nvim-surround;
         type = "lua";
         config = ''
@@ -51,7 +67,7 @@
         '';
       }
 
-      { 
+      {
         plugin = vim-easymotion;
         type = "vim";
         config = ''
@@ -60,7 +76,7 @@
           },{prefix = "<space>", noremap = true})
         '';
       }
-      { 
+      {
         plugin = telescope-nvim;
         type = "lua";
         config = ''
@@ -145,7 +161,6 @@
     '';
     extraLuaConfig = ''
       vim.o.background = "dark"
-      vim.cmd([[colorscheme gruvbox]])
       vim.opt.backup = false
       vim.opt.writebackup = false
       vim.opt.updatetime = 300

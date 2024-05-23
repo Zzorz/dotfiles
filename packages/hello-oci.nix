@@ -1,4 +1,4 @@
-{pkgs, inputs,system, ...}:
+{ pkgs, inputs, system, ... }:
 pkgs.dockerTools.buildImage {
   name = "hello-oci";
   tag = "latest";
