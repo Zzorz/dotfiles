@@ -42,7 +42,7 @@ stdenv.mkDerivation rec {
     "--disable-system"
     "--enable-user"
     "--disable-install-blobs"
-    "--target-list=arm-linux-user aarch64-linux-user x86_64-linux-user i386-linux-user mips-linux-user mips64-linux-user"
+    "--target-list=arm-linux-user,aarch64-linux-user,x86_64-linux-user,i386-linux-user,mips-linux-user,mips64-linux-user"
   ];
   preBuild = "cd build";
 }
