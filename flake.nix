@@ -19,6 +19,16 @@
       url = "git+https://github.com/nix-community/flakelight?submodules=1&shallow=1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-darwin = {
+      url = "git+https://github.com/LnL7/nix-darwin?submodules=1&shallow=1";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    flakelight-darwin = {
+      url = "git+https://github.com/cmacrae/flakelight-darwin?submodules=1&shallow=1";
+      inputs.flakelight.follows = "flakelight";
+      inputs.nix-darwin.follows = "nix-darwin";
+    };
 
   };
 
@@ -32,8 +42,9 @@
   };
 
   outputs = { flakelight, ... }@inputs:
-    flakelight ./. {
+    flakelight ./. ({ lib, ... }: {
       inherit inputs;
+      systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" ];
       nixDir = ./.;
       nixpkgs.config = {
         allowUnfree = true;
@@ -45,6 +56,8 @@
         nixosModules = [ "nixos-modules" ];
         homeConfigurations = [ "home-configurations" ];
         nixosConfigurations = [ "nixos-configurations" ];
+        darwinConfigurations = [ "darwin-configurations" ];
+        bundlers = [ "bundlers" ];
       };
-    };
+    });
 }

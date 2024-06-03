@@ -1,0 +1,2 @@
+{ pkgs, ... }: drv:
+drv

@@ -23,6 +23,32 @@
         "url": "https://github.com/nix-community/flakelight"
       }
     },
+    "flakelight-darwin": {
+      "inputs": {
+        "flakelight": [
+          "flakelight"
+        ],
+        "nix-darwin": [
+          "nix-darwin"
+        ]
+      },
+      "locked": {
+        "lastModified": 1716897882,
+        "narHash": "sha256-HWgUSH94mT9mYqSggxF5MsE+wm2n89vnJ2Ig7Q26CfQ=",
+        "ref": "refs/heads/main",
+        "rev": "833ee40e6be7b9ae0e66360dbb15165abb4359b9",
+        "shallow": true,
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/cmacrae/flakelight-darwin"
+      },
+      "original": {
+        "shallow": true,
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/cmacrae/flakelight-darwin"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -44,6 +70,29 @@
         "submodules": true,
         "type": "git",
         "url": "https://github.com/nix-community/home-manager"
+      }
+    },
+    "nix-darwin": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1716993688,
+        "narHash": "sha256-vo5k2wQekfeoq/2aleQkBN41dQiQHNTniZeVONWiWLs=",
+        "ref": "refs/heads/master",
+        "rev": "c0d5b8c54d6828516c97f6be9f2d00c63a363df4",
+        "shallow": true,
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/LnL7/nix-darwin"
+      },
+      "original": {
+        "shallow": true,
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/LnL7/nix-darwin"
       }
     },
     "nixpkgs": {
@@ -89,7 +138,9 @@
     "root": {
       "inputs": {
         "flakelight": "flakelight",
+        "flakelight-darwin": "flakelight-darwin",
         "home-manager": "home-manager",
+        "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs",
         "nixpkgs-lib": "nixpkgs-lib"
       }
