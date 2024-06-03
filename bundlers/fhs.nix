@@ -1,2 +1,0 @@
-{ pkgs, ... }: drv:
-drv
