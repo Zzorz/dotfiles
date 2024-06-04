@@ -1,7 +1,21 @@
-{ pkgs, stdenv, writeShellScript, writeShellScriptBin, ... }: drv:
+{ pkgs, stdenv, writeScriptBin, ... }: drv:
 let
-  entry-script = writeShellScriptBin "${drv.pname}-entry" ''
+  entry-script = writeScriptBin "${drv.pname}-entry" ''
+    #!/bin/sh
     prog_name=$(basename $0)
+    prog_path=$(dirname $(realpath $0))
+    mountpoint=/tmp/${drv.name}
+
+
+    function ctrl_c() {
+        umount $mountpoint
+        rmdir $mountpoint
+    }
+    trap ctrl_c INT
+
+
+
+
     if [[ "$prog_name" == ${drv.pname}-entry ]]
     then
         prog_name=$1
@@ -12,24 +26,37 @@ let
         fi
         shift
     fi
-    ${drv}/bin/$prog_name $@
+
+
+    if [[ ! -d $mountpoint ]]
+    then
+        mkdir $mountpoint
+    else 
+        umount $mountpoint 2>/dev/null
+    fi
+
+
+
+    $prog_path/squashfuse $prog_path/../${drv.name}.store $mountpoint
+    $prog_path/bwrap --dev-bind / / --bind $mountpoint/nix /nix ${drv}/bin/$prog_name $@
+
   '';
 in
 stdenv.mkDerivation {
   pname = drv.pname;
   version = drv.version;
-  closureInfo = pkgs.closureInfo { rootPaths = [ drv ]; };
+  closureInfo = pkgs.closureInfo { rootPaths = [ drv pkgs.bash]; };
   bundledDrv = drv;
   buildCommand = ''
-    mkdir -p $out/nix/store
     mkdir -p $out/bin
     cd $out
 
     cp ${entry-script}/bin/${drv.pname}-entry $out/bin
+    cp ${pkgs.pkgsStatic.bubblewrap}/bin/bwrap $out/bin
+    cp ${pkgs.pkgsStatic.squashfuse}/bin/squashfuse $out/bin
+    cp ${pkgs.pkgsStatic.dash}/bin/dash $out/bin/sh
 
-    for i in $(< $closureInfo/store-paths); do
-      cp -a "$i" "$out/$i"
-    done
+    tar cf - $(< $closureInfo/store-paths) | ${pkgs.squashfsTools}/bin/mksquashfs - ${drv.name}.store -tar -no-recovery -no-strip -comp zstd -Xcompression-level 1 
 
     cd $out/bin
     for i in $(ls $bundledDrv/bin);do
