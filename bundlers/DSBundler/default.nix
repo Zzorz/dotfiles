@@ -56,7 +56,7 @@ stdenv.mkDerivation {
     cp ${pkgs.pkgsStatic.squashfuse}/bin/squashfuse $out/bin
     cp ${pkgs.pkgsStatic.dash}/bin/dash $out/bin/sh
 
-    tar cf - $(< $closureInfo/store-paths) | ${pkgs.squashfsTools}/bin/mksquashfs - ${drv.name}.store -tar -no-recovery -no-strip -comp zstd -Xcompression-level 1 
+    tar cf - $(< $closureInfo/store-paths) | ${pkgs.squashfsTools}/bin/mksquashfs - ${drv.name}.store -tar -no-recovery -no-strip -comp lz4 #zstd -Xcompression-level 1 
 
     cd $out/bin
     for i in $(ls $bundledDrv/bin);do
