@@ -10,6 +10,7 @@
   networking.hostName = "adguardhome";
   services = {
     adguardhome.enable = true;
+    resolved.enable = false;
   };
 
   #users.users.razyang = {
