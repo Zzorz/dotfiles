@@ -12,6 +12,10 @@
     adguardhome.enable = true;
     resolved.enable = false;
   };
+  environment.systemPackages = with pkgs; [
+    git
+    vim
+  ];
 
   #users.users.razyang = {
   #  isNormalUser = true;

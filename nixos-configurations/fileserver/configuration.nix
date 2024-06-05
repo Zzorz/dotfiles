@@ -49,6 +49,10 @@
       };
     };
   };
+  environment.systemPackages = with pkgs; [
+    git
+    vim
+  ];
 
   #users.users.razyang = {
   #  isNormalUser = true;

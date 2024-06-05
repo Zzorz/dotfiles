@@ -45,7 +45,7 @@ in
 stdenv.mkDerivation {
   pname = drv.pname;
   version = drv.version;
-  closureInfo = pkgs.closureInfo { rootPaths = [ drv pkgs.bash]; };
+  closureInfo = pkgs.closureInfo { rootPaths = [ drv pkgs.bash ]; };
   bundledDrv = drv;
   buildCommand = ''
     mkdir -p $out/bin
