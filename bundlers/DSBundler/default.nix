@@ -7,7 +7,7 @@ let
     mountpoint=/tmp/${drv.name}
 
 
-    function ctrl_c() {
+    ctrl_c() {
         umount $mountpoint
         rmdir $mountpoint
     }
@@ -16,10 +16,10 @@ let
 
 
 
-    if [[ "$prog_name" == ${drv.pname}-entry ]]
+    if [ "$prog_name" = "${drv.pname}-entry" ]
     then
         prog_name=$1
-        if [[ "$prog_name" == "" ]]
+        if [ "$prog_name" = "" ]
         then
             echo "No program name was provided"
             exit 1
@@ -28,33 +28,31 @@ let
     fi
 
 
-    if [[ ! -d $mountpoint ]]
+    if ! test -d $mountpoint
     then
         mkdir $mountpoint
     else 
-        umount $mountpoint 2>/dev/null
+        umount $mountpoint
     fi
 
-
-
-    $prog_path/squashfuse $prog_path/../${drv.name}.store $mountpoint
-    $prog_path/bwrap --dev-bind / / --bind $mountpoint/nix /nix ${drv}/bin/$prog_name $@
+    $prog_path/.utils/squashfuse $prog_path/../${drv.name}.store $mountpoint
+    $prog_path/.utils/bwrap --dev-bind / / --bind $mountpoint/nix /nix ${drv}/bin/$prog_name $@
 
   '';
 in
 stdenv.mkDerivation {
   pname = drv.pname;
   version = drv.version;
-  closureInfo = pkgs.closureInfo { rootPaths = [ drv pkgs.bash]; };
+  closureInfo = pkgs.closureInfo { rootPaths = [ drv pkgs.bash ]; };
   bundledDrv = drv;
   buildCommand = ''
-    mkdir -p $out/bin
+    mkdir -p $out/bin/.utils
     cd $out
 
     cp ${entry-script}/bin/${drv.pname}-entry $out/bin
-    cp ${pkgs.pkgsStatic.bubblewrap}/bin/bwrap $out/bin
-    cp ${pkgs.pkgsStatic.squashfuse}/bin/squashfuse $out/bin
-    cp ${pkgs.pkgsStatic.dash}/bin/dash $out/bin/sh
+    cp ${pkgs.pkgsStatic.bubblewrap}/bin/bwrap $out/bin/.utils
+    cp ${pkgs.pkgsStatic.squashfuse}/bin/squashfuse $out/bin/.utils
+    cp ${pkgs.pkgsStatic.dash}/bin/dash $out/bin/.utils/sh
 
     tar cf - $(< $closureInfo/store-paths) | ${pkgs.squashfsTools}/bin/mksquashfs - ${drv.name}.store -tar -no-recovery -no-strip -comp lz4 #zstd -Xcompression-level 1 
 
