@@ -33,7 +33,7 @@
           owner = "z-shell";
           repo = "zsh-editing-workbench";
           rev = "v1.0.0";
-          sha256 = "sha256-087bNmB5gDUKoSriHIjXOVZiUG5+Dy9qv3D69E8GBhs=";
+          sha256 = "sha256-06uxsCyIY+fydZCB+sjb5qcsLBEk1zrRtWGav3lrstQ=";
         };
       }
     ];
