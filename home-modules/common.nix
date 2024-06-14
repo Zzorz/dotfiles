@@ -36,12 +36,11 @@
         bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
       '';
     };
-    #starship.enable = true;
     zoxide = { enable = true; enableZshIntegration = true; };
     fzf = { enable = true; enableZshIntegration = true; };
+    nix-index = { enable = true; enableZshIntegration = true; };
     atuin.enable = true;
     navi.enable = true;
-    #nix-index.enable = true;
     ripgrep.enable = true;
     broot.enable = true;
     bottom.enable = true;

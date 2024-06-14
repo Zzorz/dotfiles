@@ -19,8 +19,14 @@
       url = "git+https://github.com/nix-community/flakelight?submodules=1&shallow=1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     nix-darwin = {
       url = "git+https://github.com/LnL7/nix-darwin?submodules=1&shallow=1";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix-index-database = {
+      url = "git+https://github.com/nix-community/nix-index-database?submodules=1&shallow=1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -30,15 +36,6 @@
       inputs.nix-darwin.follows = "nix-darwin";
     };
 
-  };
-
-  nixConfig = {
-    extra-experimental-features = "nix-command flakes";
-    extra-substituters = [ "https://mirrors.cernet.edu.cn/nix-channels/store" "https://nix-community.cachix.org" ];
-    extra-trusted-public-keys = [
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-    ];
-    auto-optimise-store = true;
   };
 
   outputs = { flakelight, ... }@inputs:

@@ -7,10 +7,10 @@
         ]
       },
       "locked": {
-        "lastModified": 1714998740,
-        "narHash": "sha256-xPlzn9tO1QAGiPEIBRK1M/HvTjg1iGfBqi9FLwaBXdQ=",
+        "lastModified": 1718022888,
+        "narHash": "sha256-qMCpvuzeB+cXPXenqEY16wZuuodwlX6pXbilwecUtQM=",
         "ref": "refs/heads/master",
-        "rev": "f132fc1409ba319458ebd93a1511b7b5bb750a5b",
+        "rev": "51c4c2912bd4079aa7479fdd497f3080ea6defed",
         "shallow": true,
         "submodules": true,
         "type": "git",
@@ -33,10 +33,10 @@
         ]
       },
       "locked": {
-        "lastModified": 1716897882,
-        "narHash": "sha256-HWgUSH94mT9mYqSggxF5MsE+wm2n89vnJ2Ig7Q26CfQ=",
+        "lastModified": 1718107491,
+        "narHash": "sha256-ActJHqhrw8DcTVeSwAieUHAZpEs+RtLOJwX8H6alD/c=",
         "ref": "refs/heads/main",
-        "rev": "833ee40e6be7b9ae0e66360dbb15165abb4359b9",
+        "rev": "d880bbfca806f30095570eb46367796b74ee5e3e",
         "shallow": true,
         "submodules": true,
         "type": "git",
@@ -56,10 +56,10 @@
         ]
       },
       "locked": {
-        "lastModified": 1715077503,
-        "narHash": "sha256-AfHQshzLQfUqk/efMtdebHaQHqVntCMjhymQzVFLes0=",
+        "lastModified": 1718243258,
+        "narHash": "sha256-abBpj2VU8p6qlRzTU8o22q68MmOaZ4v8zZ4UlYl5YRU=",
         "ref": "refs/heads/master",
-        "rev": "6e277d9566de9976f47228dd8c580b97488734d4",
+        "rev": "8d5e27b4807d25308dfe369d5a923d87e7dbfda3",
         "shallow": true,
         "submodules": true,
         "type": "git",
@@ -79,10 +79,10 @@
         ]
       },
       "locked": {
-        "lastModified": 1716993688,
-        "narHash": "sha256-vo5k2wQekfeoq/2aleQkBN41dQiQHNTniZeVONWiWLs=",
+        "lastModified": 1718305085,
+        "narHash": "sha256-Ft0v0tbnNeWqYuZT68z9nuyJO2N8V7Xf65MiZbeWv4A=",
         "ref": "refs/heads/master",
-        "rev": "c0d5b8c54d6828516c97f6be9f2d00c63a363df4",
+        "rev": "b2ee0b3c03b06bd70e4280c65ab8803c3456bb0f",
         "shallow": true,
         "submodules": true,
         "type": "git",
@@ -95,12 +95,35 @@
         "url": "https://github.com/LnL7/nix-darwin"
       }
     },
+    "nix-index-database": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1718011381,
+        "narHash": "sha256-sFXI+ZANp/OC+MwfJoZgPSf4xMdtzQMe1pS3FGti4C8=",
+        "ref": "refs/heads/main",
+        "rev": "88ad3d7501e22b2401dd72734b032b7baa794434",
+        "shallow": true,
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/nix-community/nix-index-database"
+      },
+      "original": {
+        "shallow": true,
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/nix-community/nix-index-database"
+      }
+    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1715087517,
-        "narHash": "sha256-CLU5Tsg24Ke4+7sH8azHWXKd0CFd4mhLWfhYgUiDBpQ=",
+        "lastModified": 1718160348,
+        "narHash": "sha256-9YrUjdztqi4Gz8n3mBuqvCkMo4ojrA6nASwyIKWMpus=",
         "ref": "nixos-unstable",
-        "rev": "b211b392b8486ee79df6cdfb1157ad2133427a29",
+        "rev": "57d6973abba7ea108bac64ae7629e7431e0199b6",
         "shallow": true,
         "submodules": true,
         "type": "git",
@@ -117,10 +140,10 @@
     "nixpkgs-lib": {
       "locked": {
         "dir": "lib",
-        "lastModified": 1715087517,
-        "narHash": "sha256-CLU5Tsg24Ke4+7sH8azHWXKd0CFd4mhLWfhYgUiDBpQ=",
+        "lastModified": 1718160348,
+        "narHash": "sha256-9YrUjdztqi4Gz8n3mBuqvCkMo4ojrA6nASwyIKWMpus=",
         "ref": "nixos-unstable",
-        "rev": "b211b392b8486ee79df6cdfb1157ad2133427a29",
+        "rev": "57d6973abba7ea108bac64ae7629e7431e0199b6",
         "shallow": true,
         "submodules": true,
         "type": "git",
@@ -141,6 +164,7 @@
         "flakelight-darwin": "flakelight-darwin",
         "home-manager": "home-manager",
         "nix-darwin": "nix-darwin",
+        "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs",
         "nixpkgs-lib": "nixpkgs-lib"
       }
