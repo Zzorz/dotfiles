@@ -7,7 +7,11 @@
 
   boot.isContainer = true;
 
-  networking.hostName = "fileserver";
+  networking = {
+    hostName = "fileserver";
+    resolvconf.enable = false;
+    nameservers = [ "172.16.0.2" ];
+  };
   services = {
     redis = {
       servers = {
