@@ -12,6 +12,7 @@
       extra-experimental-features = nix-command flakes
     '';
   };
+  programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {
