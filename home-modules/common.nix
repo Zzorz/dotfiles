@@ -4,6 +4,16 @@
     zsh
     neovim
   ];
+  systemd.user.services = {
+    atuin = {
+      Unit = {
+        Description = "atuin daemon";
+      };
+      Service = {
+        ExecStart = "${pkgs.atuin}/bin/atuin daemon";
+      };
+    };
+  };
   programs = {
     pyenv.enable = true;
     git = {
@@ -39,7 +49,12 @@
     zoxide = { enable = true; enableZshIntegration = true; };
     fzf = { enable = true; enableZshIntegration = true; };
     nix-index = { enable = true; enableZshIntegration = true; };
-    atuin.enable = true;
+    atuin = {
+      enable = true;
+      settings = {
+        daemon = { enabled = true; };
+      };
+    };
     navi.enable = true;
     ripgrep.enable = true;
     broot.enable = true;
