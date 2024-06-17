@@ -1,5 +1,29 @@
 {
   "nodes": {
+    "flake-programs-sqlite": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "utils": "utils"
+      },
+      "locked": {
+        "lastModified": 1718630441,
+        "narHash": "sha256-s6eagQqT/cASXRVWqkWnD/kLZJfmRcI0uZkgW9q1ocE=",
+        "ref": "refs/heads/main",
+        "rev": "bb1d4f175ef7c94ad405d2b471a2ed4df1132f19",
+        "shallow": true,
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/wamserma/flake-programs-sqlite"
+      },
+      "original": {
+        "shallow": true,
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/wamserma/flake-programs-sqlite"
+      }
+    },
     "flakelight": {
       "inputs": {
         "nixpkgs": [
@@ -160,6 +184,7 @@
     },
     "root": {
       "inputs": {
+        "flake-programs-sqlite": "flake-programs-sqlite",
         "flakelight": "flakelight",
         "flakelight-darwin": "flakelight-darwin",
         "home-manager": "home-manager",
@@ -167,6 +192,21 @@
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs",
         "nixpkgs-lib": "nixpkgs-lib"
+      }
+    },
+    "utils": {
+      "locked": {
+        "lastModified": 1678901627,
+        "narHash": "sha256-U02riOqrKKzwjsxc/400XnElV+UtPUQWpANPlyazjH0=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "93a2b84fc4b70d9e089d029deacc3583435c2ed6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
       }
     }
   },

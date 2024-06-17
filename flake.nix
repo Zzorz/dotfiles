@@ -15,6 +15,12 @@
       url = "git+https://mirrors.cernet.edu.cn/nixpkgs.git?submodules=1&shallow=1&ref=nixos-unstable&dir=lib";
     };
 
+    flake-programs-sqlite = {
+      url = "git+https://github.com/wamserma/flake-programs-sqlite?submodules=1&shallow=1";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+
     flakelight = {
       url = "git+https://github.com/nix-community/flakelight?submodules=1&shallow=1";
       inputs.nixpkgs.follows = "nixpkgs";

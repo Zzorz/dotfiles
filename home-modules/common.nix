@@ -4,13 +4,15 @@
     zsh
     neovim
   ];
-  systemd.user.services = {
-    atuin = {
-      Unit = {
-        Description = "atuin daemon";
-      };
-      Service = {
-        ExecStart = "${pkgs.atuin}/bin/atuin daemon";
+  systemd.user = {
+    services = {
+      atuin = {
+        Unit = {
+          Description = "atuin daemon";
+        };
+        Service = {
+          ExecStart = "${pkgs.atuin}/bin/atuin daemon";
+        };
       };
     };
   };
@@ -48,7 +50,15 @@
     };
     zoxide = { enable = true; enableZshIntegration = true; };
     fzf = { enable = true; enableZshIntegration = true; };
-    nix-index = { enable = true; enableZshIntegration = true; };
+    command-not-found = {
+      enable = true;
+      dbPath = inputs.flake-programs-sqlite.packages.${pkgs.system}.programs-sqlite;
+    };
+    nix-index = {
+      enable = true;
+      enableZshIntegration = false;
+      enableBashIntegration = false;
+    };
     atuin = {
       enable = true;
       settings = {
