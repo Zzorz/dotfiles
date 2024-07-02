@@ -61,11 +61,11 @@
               end
             },
             window = {
-              completion = {
-                winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+              completion = cmp.config.window.bordered({
+                -- winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
                 col_offset = -3,
                 side_padding = 0,
-              },
+              }),
               documentation = cmp.config.window.bordered(),
             },
             mapping = cmp.mapping.preset.insert({
@@ -105,7 +105,7 @@
         config = ''
           local capabilities = require('cmp_nvim_lsp').default_capabilities()
           require('lspconfig').clangd.setup({
-            cmd = {"${pkgs.clang-tools}/bin/clangd"},
+            cmd = {"${pkgs.clang-tools}/bin/clangd", "--fallback-style=webkit"},
             capabilities = capabilities,
           })
           require('lspconfig').pyright.setup({
