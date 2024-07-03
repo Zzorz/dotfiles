@@ -4,6 +4,28 @@
     zsh
     neovim
   ];
+  nix.registry = {
+    nixpkgs = {
+      from = { id = "nixpkgs"; type = "indirect"; };
+      flake = inputs.nixpkgs;
+    };
+    home-manager = {
+      from = { id = "home-manager"; type = "indirect"; };
+      flake = inputs.home-manager;
+    };
+  };
+  systemd.user = {
+    services = {
+      atuin = {
+        Unit = {
+          Description = "atuin daemon";
+        };
+        Service = {
+          ExecStart = "${pkgs.atuin}/bin/atuin daemon";
+        };
+      };
+    };
+  };
   programs = {
     pyenv.enable = true;
     git = {
@@ -49,7 +71,8 @@
     };
     atuin = {
       enable = true;
-      settings = { };
+      settings = { daemon = { enabled = true; }; };
+
     };
     navi.enable = true;
     ripgrep.enable = true;
