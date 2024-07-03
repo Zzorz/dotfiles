@@ -11,15 +11,16 @@
 
     plugins = with pkgs.vimPlugins; [
       nerdcommenter
+
       nvim-treesitter.withAllGrammars
       nvim-treesitter-refactor
       nvim-treesitter-textobjects
       nvim-treesitter-context
-      vim-airline
-      quick-scope
-      #copilot-vim
-      vim-visual-multi
 
+      vim-airline
+      #copilot-vim
+
+      vim-visual-multi
       cmp-nvim-lsp
       cmp-buffer
       cmp-path
@@ -27,6 +28,7 @@
       vim-vsnip
       cmp-vsnip
       lspkind-nvim
+
 
       {
         plugin = nvim-autopairs;
@@ -163,15 +165,6 @@
       }
 
       {
-        plugin = vim-easymotion;
-        type = "vim";
-        config = ''
-          wk = require("which-key")
-          wk.register({
-          },{prefix = "<space>", noremap = true})
-        '';
-      }
-      {
         plugin = telescope-nvim;
         type = "lua";
         config = ''
@@ -209,6 +202,30 @@
           }
         '';
       }
+
+      {
+        plugin = flash-nvim;
+        type = "lua";
+        config = ''
+          local flash = require('flash')
+          flash.setup({
+            modes = {
+              search = {
+                enable = true,
+              },
+              char = {
+                enable = true,
+              },
+              char = {
+                enable = true,
+                jump_labels = true,
+              },
+            },
+          })
+          flash.toggle()
+        '';
+      }
+      
 
       {
         plugin = which-key-nvim;
@@ -249,15 +266,12 @@
               f = {"<cmd>lua vim.diagnostic.open_float()<cr>", ""},
             },
             ["<space>"] = {
-              name = "easymotion",
-              f = {"<Plug>(easymotion-f)", "f{char} to move to {char}"},
-              s = {"<Plug>(easymotion-f2)", "s{char}{char} to move to {char}{char}"},
-              w = {"<Plug>(easymotion-w)", "Move to word"},
-              l = {"<Plug>(easymotion-bd-jk)", "Move to line"},
+              name = "jump",
+              f = {"<cmd>lua require('flash').jump()<cr>", "flash jump"},
+              t = {"<cmd>lua require('flash').toggle()<cr>", ""},
             }
           }, {prefix= "<space>",noremap = true})
-
-
+       
           wk.register({
             g = {
               name = "goto",
