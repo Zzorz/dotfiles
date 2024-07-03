@@ -40,7 +40,7 @@
       historyLimit = 5000;
       keyMode = "vi";
       prefix = "C-q";
-      terminal = "tmux-256color";
+      terminal = "screen-256color";
       plugins = with pkgs.tmuxPlugins; [
         gruvbox
       ];
