@@ -15,9 +15,9 @@
       nvim-treesitter.withAllGrammars
       nvim-treesitter-refactor
       nvim-treesitter-textobjects
+
       nvim-treesitter-context
 
-      vim-airline
       #copilot-vim
 
       vim-visual-multi
@@ -29,6 +29,28 @@
       cmp-vsnip
       lspkind-nvim
 
+      trouble-nvim
+      {
+        plugin = noice-nvim;
+        type = "lua";
+        config = ''
+          require("noice").setup({
+            lsp = {
+              override = {
+                ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+                ["vim.lsp.util.stylize_markdown"] = true,
+                ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+              },
+            },
+            presets = {
+              bottom_search = false, -- use a classic bottom cmdline for search
+              command_palette = true, -- position the cmdline and popupmenu together
+              long_message_to_split = true, -- long messages will be sent to a split
+              lsp_doc_border = true, -- add a border to hover docs and signature help
+            },
+	  })
+        '';
+      }
 
       {
         plugin = nvim-autopairs;
@@ -129,22 +151,36 @@
         '';
       }
 
-
       {
-        plugin = base16-nvim;
+        plugin = gruvbox-nvim;
         type = "lua";
         config = ''
-          vim.opt.termguicolors = true
-          require('base16-colorscheme').with_config({
-            telescope = true,
-            indentblankline = true,
-            notify = true,
-            ts_rainbow = true,
-            cmp = true,
-            illuminate = true,
-            dapui = true,
+          require("gruvbox").setup({
+            terminal_colors = true, 
+            undercurl = true,
+            underline = true,
+            bold = true,
+            italic = {
+              strings = true,
+              emphasis = true,
+              comments = true,
+              operators = false,
+              folds = true,
+            }, 
+            strikethrough = true,
+            invert_selection = false,
+            invert_signs = false,
+            invert_tabline = false,
+            invert_intend_guides = false,
+            inverse = true,
+            contrast = "",
+            palette_overrides = {},
+            overrides = {},
+            dim_inactive = false,
+            transparent_mode = false,
           })
-          vim.cmd('colorscheme base16-gruvbox-dark-pale')
+          vim.o.background = "dark" -- or "light" for light mode
+          vim.cmd([[colorscheme gruvbox]])
         '';
       }
 
@@ -160,6 +196,7 @@
         plugin = indent-blankline-nvim;
         type = "lua";
         config = ''
+          local highlight = { "CursorColumn", "Whitespace"}
           require("ibl").setup()
         '';
       }
@@ -209,16 +246,25 @@
         config = ''
           local flash = require('flash')
           flash.setup({
+            labels = "aervhjkiubng<>@'",
+            treesitter = {
+              labels = "aervhjkiubng<>@'",
+              label = { before = true, after = true, style = "inline" },
+            },
+            label = {
+              rainbow = {
+                enabled = true,
+                shade = 9,
+              },
+            },
             modes = {
               search = {
                 enable = true,
               },
               char = {
                 enable = true,
-              },
-              char = {
-                enable = true,
                 jump_labels = true,
+                keys = { "f", "F", "," },
               },
             },
           })
@@ -280,6 +326,7 @@
               i = {"<cmd>lua vim.lsp.buf.implementation()<cr>", "Goto Implementation"},
               r = {"<cmd>lua vim.lsp.buf.references()<cr>", "Goto Reference"},
             },
+            t = {"<cmd>lua require('flash').treesitter() require('flash').toggle()<cr>", ""},
           })
         '';
       }
@@ -290,7 +337,7 @@
     extraLuaConfig = ''
       vim.o.background = "dark"
       vim.o.tabstop = 4 -- A TAB character looks like 4 spaces
-      vim.o.expandtab = true -- Pressing the TAB key will insert spaces instead of a TAB character
+      vim.o.expandtab = true -- Pressing the TAB key ill insert spaces instead of a TAB character
       vim.o.softtabstop = 4 -- Number of spaces inserted instead of a TAB character
       vim.o.shiftwidth = 4
       vim.opt.backup = false
