@@ -3,6 +3,7 @@
   imports = [
     inputs.self.homeModules.common
     inputs.nix-index-database.hmModules.nix-index
+    inputs.nixvim.homeManagerModules.nixvim
   ];
   programs.nix-index-database.comma.enable = true;
   nix = {

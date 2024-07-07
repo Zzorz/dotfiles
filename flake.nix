@@ -3,31 +3,21 @@
 
   inputs = {
     nixpkgs = {
-      url = "git+https://mirrors.cernet.edu.cn/nixpkgs.git?submodules=1&shallow=1&ref=nixos-unstable";
+      url = "github:NixOS/nixpkgs/nixos-unstable";
     };
 
     home-manager = {
-      url = "git+https://github.com/nix-community/home-manager?submodules=1&shallow=1";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nixpkgs-lib = {
-      url = "git+https://mirrors.cernet.edu.cn/nixpkgs.git?submodules=1&shallow=1&ref=nixos-unstable&dir=lib";
-    };
-
-    flake-programs-sqlite = {
-      url = "git+https://github.com/wamserma/flake-programs-sqlite?submodules=1&shallow=1";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
 
     flakelight = {
       url = "git+https://github.com/nix-community/flakelight?submodules=1&shallow=1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-darwin = {
-      url = "git+https://github.com/LnL7/nix-darwin?submodules=1&shallow=1";
+    flake-programs-sqlite = {
+      url = "git+https://github.com/wamserma/flake-programs-sqlite?submodules=1&shallow=1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -36,12 +26,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    flakelight-darwin = {
-      url = "git+https://github.com/cmacrae/flakelight-darwin?submodules=1&shallow=1";
-      inputs.flakelight.follows = "flakelight";
-      inputs.nix-darwin.follows = "nix-darwin";
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-
   };
 
   outputs = { flakelight, ... }@inputs:
@@ -59,7 +47,6 @@
         nixosModules = [ "nixos-modules" ];
         homeConfigurations = [ "home-configurations" ];
         nixosConfigurations = [ "nixos-configurations" ];
-        darwinConfigurations = [ "darwin-configurations" ];
         bundlers = [ "bundlers" ];
       };
     });

@@ -1,5 +1,78 @@
 {
   "nodes": {
+    "devshell": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": [
+          "nixvim",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1717408969,
+        "narHash": "sha256-Q0OEFqe35fZbbRPPRdrjTUUChKVhhWXz3T9ZSKmaoVY=",
+        "owner": "numtide",
+        "repo": "devshell",
+        "rev": "1ebbe68d57457c8cae98145410b164b5477761f4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "devshell",
+        "type": "github"
+      }
+    },
+    "flake-compat": {
+      "locked": {
+        "lastModified": 1696426674,
+        "narHash": "sha256-kvjfFW7WAETZlt09AgDn1MrtKzP7t90Vf7vypd3OL1U=",
+        "rev": "0f9255e01c2351cc7d116c072cb317785dd33b33",
+        "revCount": 57,
+        "type": "tarball",
+        "url": "https://api.flakehub.com/f/pinned/edolstra/flake-compat/1.0.1/018afb31-abd1-7bff-a5e4-cff7e18efb7a/source.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://flakehub.com/f/edolstra/flake-compat/1.tar.gz"
+      }
+    },
+    "flake-compat_2": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1696426674,
+        "narHash": "sha256-kvjfFW7WAETZlt09AgDn1MrtKzP7t90Vf7vypd3OL1U=",
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "rev": "0f9255e01c2351cc7d116c072cb317785dd33b33",
+        "type": "github"
+      },
+      "original": {
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "type": "github"
+      }
+    },
+    "flake-parts": {
+      "inputs": {
+        "nixpkgs-lib": [
+          "nixvim",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1719877454,
+        "narHash": "sha256-g5N1yyOSsPNiOlFfkuI/wcUjmtah+nxdImJqrSATjOU=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "4e3583423212f9303aa1a6337f8dffb415920e4f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
     "flake-programs-sqlite": {
       "inputs": {
         "nixpkgs": [
@@ -8,10 +81,10 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1718630441,
-        "narHash": "sha256-s6eagQqT/cASXRVWqkWnD/kLZJfmRcI0uZkgW9q1ocE=",
+        "lastModified": 1720260200,
+        "narHash": "sha256-OAwzdDQjAUk4eD/7HS0D11tXO3SnoZGCQSY9BIjRrtk=",
         "ref": "refs/heads/main",
-        "rev": "bb1d4f175ef7c94ad405d2b471a2ed4df1132f19",
+        "rev": "abd718855f338444afb23ec5ff644f7c6f51d476",
         "shallow": true,
         "submodules": true,
         "type": "git",
@@ -22,6 +95,24 @@
         "submodules": true,
         "type": "git",
         "url": "https://github.com/wamserma/flake-programs-sqlite"
+      }
+    },
+    "flake-utils": {
+      "inputs": {
+        "systems": "systems"
+      },
+      "locked": {
+        "lastModified": 1701680307,
+        "narHash": "sha256-kAuep2h5ajznlPMD9rnQyffWG8EM/C73lejGofXvdM8=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "4022d587cbbfd70fe950c1e2083a02621806a725",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
       }
     },
     "flakelight": {
@@ -47,30 +138,53 @@
         "url": "https://github.com/nix-community/flakelight"
       }
     },
-    "flakelight-darwin": {
+    "git-hooks": {
       "inputs": {
-        "flakelight": [
-          "flakelight"
+        "flake-compat": "flake-compat_2",
+        "gitignore": "gitignore",
+        "nixpkgs": [
+          "nixvim",
+          "nixpkgs"
         ],
-        "nix-darwin": [
-          "nix-darwin"
+        "nixpkgs-stable": [
+          "nixvim",
+          "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1718107491,
-        "narHash": "sha256-ActJHqhrw8DcTVeSwAieUHAZpEs+RtLOJwX8H6alD/c=",
-        "ref": "refs/heads/main",
-        "rev": "d880bbfca806f30095570eb46367796b74ee5e3e",
-        "shallow": true,
-        "submodules": true,
-        "type": "git",
-        "url": "https://github.com/cmacrae/flakelight-darwin"
+        "lastModified": 1719259945,
+        "narHash": "sha256-F1h+XIsGKT9TkGO3omxDLEb/9jOOsI6NnzsXFsZhry4=",
+        "owner": "cachix",
+        "repo": "git-hooks.nix",
+        "rev": "0ff4381bbb8f7a52ca4a851660fc7a437a4c6e07",
+        "type": "github"
       },
       "original": {
-        "shallow": true,
-        "submodules": true,
-        "type": "git",
-        "url": "https://github.com/cmacrae/flakelight-darwin"
+        "owner": "cachix",
+        "repo": "git-hooks.nix",
+        "type": "github"
+      }
+    },
+    "gitignore": {
+      "inputs": {
+        "nixpkgs": [
+          "nixvim",
+          "git-hooks",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1709087332,
+        "narHash": "sha256-HG2cCnktfHsKV0s4XW83gU3F57gaTljL9KNSuG6bnQs=",
+        "owner": "hercules-ci",
+        "repo": "gitignore.nix",
+        "rev": "637db329424fd7e46cf4185293b9cc8c88c95394",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "gitignore.nix",
+        "type": "github"
       }
     },
     "home-manager": {
@@ -80,43 +194,59 @@
         ]
       },
       "locked": {
-        "lastModified": 1718243258,
-        "narHash": "sha256-abBpj2VU8p6qlRzTU8o22q68MmOaZ4v8zZ4UlYl5YRU=",
-        "ref": "refs/heads/master",
-        "rev": "8d5e27b4807d25308dfe369d5a923d87e7dbfda3",
-        "shallow": true,
-        "submodules": true,
-        "type": "git",
-        "url": "https://github.com/nix-community/home-manager"
+        "lastModified": 1720188602,
+        "narHash": "sha256-lC3byBmhVZFzWl/dCic8+cKUEEAXAswWOYjq4paFmbo=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "e3582e5151498bc4d757e8361431ace8529e7bb7",
+        "type": "github"
       },
       "original": {
-        "shallow": true,
-        "submodules": true,
-        "type": "git",
-        "url": "https://github.com/nix-community/home-manager"
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "home-manager_2": {
+      "inputs": {
+        "nixpkgs": [
+          "nixvim",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1720188602,
+        "narHash": "sha256-lC3byBmhVZFzWl/dCic8+cKUEEAXAswWOYjq4paFmbo=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "e3582e5151498bc4d757e8361431ace8529e7bb7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
       }
     },
     "nix-darwin": {
       "inputs": {
         "nixpkgs": [
+          "nixvim",
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1718305085,
-        "narHash": "sha256-Ft0v0tbnNeWqYuZT68z9nuyJO2N8V7Xf65MiZbeWv4A=",
-        "ref": "refs/heads/master",
-        "rev": "b2ee0b3c03b06bd70e4280c65ab8803c3456bb0f",
-        "shallow": true,
-        "submodules": true,
-        "type": "git",
-        "url": "https://github.com/LnL7/nix-darwin"
+        "lastModified": 1719845423,
+        "narHash": "sha256-ZLHDmWAsHQQKnmfyhYSHJDlt8Wfjv6SQhl2qek42O7A=",
+        "owner": "lnl7",
+        "repo": "nix-darwin",
+        "rev": "ec12b88104d6c117871fad55e931addac4626756",
+        "type": "github"
       },
       "original": {
-        "shallow": true,
-        "submodules": true,
-        "type": "git",
-        "url": "https://github.com/LnL7/nix-darwin"
+        "owner": "lnl7",
+        "repo": "nix-darwin",
+        "type": "github"
       }
     },
     "nix-index-database": {
@@ -144,54 +274,91 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1718160348,
-        "narHash": "sha256-9YrUjdztqi4Gz8n3mBuqvCkMo4ojrA6nASwyIKWMpus=",
-        "ref": "nixos-unstable",
-        "rev": "57d6973abba7ea108bac64ae7629e7431e0199b6",
-        "shallow": true,
-        "submodules": true,
-        "type": "git",
-        "url": "https://mirrors.cernet.edu.cn/nixpkgs.git"
+        "lastModified": 1720031269,
+        "narHash": "sha256-rwz8NJZV+387rnWpTYcXaRNvzUSnnF9aHONoJIYmiUQ=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "9f4128e00b0ae8ec65918efeba59db998750ead6",
+        "type": "github"
       },
       "original": {
+        "owner": "NixOS",
         "ref": "nixos-unstable",
-        "shallow": true,
-        "submodules": true,
-        "type": "git",
-        "url": "https://mirrors.cernet.edu.cn/nixpkgs.git"
+        "repo": "nixpkgs",
+        "type": "github"
       }
     },
-    "nixpkgs-lib": {
+    "nixvim": {
+      "inputs": {
+        "devshell": "devshell",
+        "flake-compat": "flake-compat",
+        "flake-parts": "flake-parts",
+        "git-hooks": "git-hooks",
+        "home-manager": "home-manager_2",
+        "nix-darwin": "nix-darwin",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "treefmt-nix": "treefmt-nix"
+      },
       "locked": {
-        "dir": "lib",
-        "lastModified": 1718160348,
-        "narHash": "sha256-9YrUjdztqi4Gz8n3mBuqvCkMo4ojrA6nASwyIKWMpus=",
-        "ref": "nixos-unstable",
-        "rev": "57d6973abba7ea108bac64ae7629e7431e0199b6",
-        "shallow": true,
-        "submodules": true,
-        "type": "git",
-        "url": "https://mirrors.cernet.edu.cn/nixpkgs.git?dir=lib"
+        "lastModified": 1720267267,
+        "narHash": "sha256-oXroBCRyTtHmiDqSFrTmLC//8fef5ECd6uEsh3bkerc=",
+        "owner": "nix-community",
+        "repo": "nixvim",
+        "rev": "843fb302ebaa2559b7c50ad69ba9a00ae1a5836d",
+        "type": "github"
       },
       "original": {
-        "dir": "lib",
-        "ref": "nixos-unstable",
-        "shallow": true,
-        "submodules": true,
-        "type": "git",
-        "url": "https://mirrors.cernet.edu.cn/nixpkgs.git?dir=lib"
+        "owner": "nix-community",
+        "repo": "nixvim",
+        "type": "github"
       }
     },
     "root": {
       "inputs": {
         "flake-programs-sqlite": "flake-programs-sqlite",
         "flakelight": "flakelight",
-        "flakelight-darwin": "flakelight-darwin",
         "home-manager": "home-manager",
-        "nix-darwin": "nix-darwin",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-lib": "nixpkgs-lib"
+        "nixvim": "nixvim"
+      }
+    },
+    "systems": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "treefmt-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixvim",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1719887753,
+        "narHash": "sha256-p0B2r98UtZzRDM5miGRafL4h7TwGRC4DII+XXHDHqek=",
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "rev": "bdb6355009562d8f9313d9460c0d3860f525bc6c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "type": "github"
       }
     },
     "utils": {
