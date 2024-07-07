@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 {
   programs.nixvim = {
     enable = true;
@@ -8,7 +8,78 @@
     defaultEditor = true;
     colorschemes.gruvbox.enable = true;
     diagnostics.virtual_lines.only_current_line = true;
+
+    ##############################
+    ### extra conifigs
+    ##############################
+    extraConfigLua = ''
+      vim.wo.number = true
+      vim.wo.relativenumber = true
+      vim.o.tabstop = 4
+      vim.o.softtabstop = 4
+      vim.o.shiftwidth = 4;
+    '';
+
+    ##############################
+    ### keymaps
+    ##############################
+    keymaps = [
+      {
+        key = "vt";
+        action = ''<cmd>lua require("flash").treesitter()<cr>'';
+        options.desc = "Flash Treesitter selection";
+      }
+      {
+        key = "m";
+        action = ''<cmd>MCstart<cr>'';
+        options.desc = "Flash Treesitter selection";
+      }
+      {
+        key = "<space><space>";
+        action = ''<cmd>Telescope find_files<cr>'';
+        options.desc = "Telescope Find File";
+      }
+      {
+        key = "<space>fg";
+        action = ''<cmd>Telescope live_grep<cr>'';
+        options.desc = "Telescope File Grap";
+      }
+      {
+        key = "<space>s";
+        action = ''<cmd>Telescope current_buffer_fuzzy_find<cr>'';
+        options.desc = "Telescope buffer Grap";
+      }
+      {
+        key = "<space>b";
+        action = ''<cmd>Telescope buffers<cr>'';
+        options.desc = "Telescope buffer switch";
+      }
+    ];
+
+
+    ##############################
+    ### plugins
+    ##############################
     plugins = {
+
+      ##############################
+      ### notify ui
+      ##############################
+      notify.enable = true;
+      noice = {
+        enable = true;
+        cmdline.enabled = true;
+        presets = {
+          bottom_search = true;
+          long_message_to_split = true;
+          lsp_doc_border = true;
+        };
+      };
+
+
+      ##############################
+      ### treesitter
+      ##############################
       treesitter = {
         enable = true;
         indent = true;
@@ -16,31 +87,21 @@
           enable = true;
           keymaps = {
             initSelection = "vv";
-            nodeDecremental = ",";
-            nodeIncremental = "<space>";
+            nodeIncremental = "e";
+            nodeDecremental = "b";
           };
-        };
-      };
-      treesitter-context = {
-        enable = true;
-        settings = {
-          enable = true;
-          line_numbers = true;
         };
       };
       treesitter-refactor = {
         enable = true;
         highlightCurrentScope.enable = true;
+        highlightDefinitions.enable = true;
       };
-      treesitter-textobjects = {
-        enable = true;
-      };
-      indent-blankline.enable = true;
-      surround = { enable = true; };
-      multicursors = {
-        enable = true;
 
-      };
+
+      ##############################
+      ### lsp config
+      ##############################
       lsp = {
         enable = true;
         servers = {
@@ -69,44 +130,12 @@
 
         };
       };
-      nvim-autopairs.enable = true;
       trouble.enable = true;
       lspkind.enable = true;
-      flash = {
-        enable = true;
-        settings = {
-          labels = "aervhjkiubng<>@'";
-          label.rainbow = { enabled = true; shade = 9; };
-          modes = {
-            char = {
-              enabled = true;
-              jump_labels = true;
-            };
-            search = { enabled = true; };
-            treesitter = {
-              enabled = true;
-            };
-          };
-        };
-      };
-      which-key = {
-        enable = true;
-        window.border = "rounded";
-      };
-      telescope = {
-        enable = true;
-      };
 
-      noice = {
-        enable = true;
-        cmdline.enabled = true;
-        presets = {
-          long_message_to_split = true;
-          lsp_doc_border = true;
-        };
-      };
-
-
+      ##############################
+      ### completion
+      ##############################
       cmp_luasnip = { enable = true; };
       luasnip = { enable = true; };
       cmp-nvim-lsp = { enable = true; };
@@ -114,15 +143,15 @@
       cmp = {
         enable = true;
         settings = {
-          window = {
+          indow = {
             completion = { border = "rounded"; };
             documentation = { border = "rounded"; };
           };
           snippet = {
             expand = ''
-              	      function(args)
-              	        require('luasnip').lsp_expand(args.body)
-              	      end
+              function(args)
+                require('luasnip').lsp_expand(args.body)
+              end
             '';
           };
 
@@ -145,8 +174,41 @@
           ];
         };
       };
+
+      ##############################
+      ### edit
+      ##############################
+      nvim-autopairs.enable = true;
+      surround = { enable = true; };
+      indent-blankline.enable = true;
+      which-key = { enable = true; window.border = "rounded"; };
+      telescope = { enable = true; };
+      multicursors = { enable = true; };
+
+      flash = {
+        enable = true;
+        settings = {
+          labels = "abcefghijklmnopqrtuvwxz<>@'";
+          label.rainbow = { enabled = true; shade = 9; };
+          modes = {
+            char = {
+              enabled = true;
+              jump_labels = true;
+              keys = {
+                __unkeyed-0 = "f";
+                __unkeyed-1 = "F";
+                __unkeyed-4 = ";";
+                __unkeyed-5 = ",";
+              };
+            };
+            search = { enabled = true; };
+            treesitter = {
+              enabled = true;
+            };
+          };
+        };
+      };
+
     };
   };
 }
-
-

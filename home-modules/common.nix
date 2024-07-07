@@ -14,18 +14,6 @@
       flake = inputs.home-manager;
     };
   };
-  systemd.user = {
-    services = {
-      atuin = {
-        Unit = {
-          Description = "atuin daemon";
-        };
-        Service = {
-          ExecStart = "${pkgs.atuin}/bin/atuin daemon";
-        };
-      };
-    };
-  };
   programs = {
     pyenv.enable = true;
     git = {
@@ -71,8 +59,11 @@
     };
     atuin = {
       enable = true;
-      settings = { daemon = { enabled = true; }; };
-
+      settings = {
+        daemon = {
+          enabled = pkgs.system != "aarch64-darwin";
+        };
+      };
     };
     navi.enable = true;
     ripgrep.enable = true;
