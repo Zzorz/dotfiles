@@ -12,17 +12,17 @@
     };
 
     flakelight = {
-      url = "git+https://github.com/nix-community/flakelight?submodules=1&shallow=1";
+      url = "github:nix-community/flakelight";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     flake-programs-sqlite = {
-      url = "git+https://github.com/wamserma/flake-programs-sqlite?submodules=1&shallow=1";
+      url = "github:wamserma/flake-programs-sqlite";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nix-index-database = {
-      url = "git+https://github.com/nix-community/nix-index-database?submodules=1&shallow=1";
+      url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

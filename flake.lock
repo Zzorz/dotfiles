@@ -83,18 +83,15 @@
       "locked": {
         "lastModified": 1720353852,
         "narHash": "sha256-+TKAbHbofyjv2UdA3Np5ZXj0kU3S6YFDTcuL3Jip6AA=",
-        "ref": "refs/heads/main",
+        "owner": "wamserma",
+        "repo": "flake-programs-sqlite",
         "rev": "bf41c99f0a47b0cc728f196cc364979a517c0ba0",
-        "shallow": true,
-        "submodules": true,
-        "type": "git",
-        "url": "https://github.com/wamserma/flake-programs-sqlite"
+        "type": "github"
       },
       "original": {
-        "shallow": true,
-        "submodules": true,
-        "type": "git",
-        "url": "https://github.com/wamserma/flake-programs-sqlite"
+        "owner": "wamserma",
+        "repo": "flake-programs-sqlite",
+        "type": "github"
       }
     },
     "flake-utils": {
@@ -124,18 +121,15 @@
       "locked": {
         "lastModified": 1719837387,
         "narHash": "sha256-HEs4CneBlAScOEE95zrUyaZAVWyEo7iKvrbnmYRSOpg=",
-        "ref": "refs/heads/master",
+        "owner": "nix-community",
+        "repo": "flakelight",
         "rev": "2a96b83bf6ffad4b8a15afe19e883ca1a1720d88",
-        "shallow": true,
-        "submodules": true,
-        "type": "git",
-        "url": "https://github.com/nix-community/flakelight"
+        "type": "github"
       },
       "original": {
-        "shallow": true,
-        "submodules": true,
-        "type": "git",
-        "url": "https://github.com/nix-community/flakelight"
+        "owner": "nix-community",
+        "repo": "flakelight",
+        "type": "github"
       }
     },
     "git-hooks": {
@@ -258,18 +252,15 @@
       "locked": {
         "lastModified": 1720334033,
         "narHash": "sha256-X9pEvvHTVWJphhbUYqXvlLedOndNqGB7rvhSvL2CIgU=",
-        "ref": "refs/heads/main",
+        "owner": "nix-community",
+        "repo": "nix-index-database",
         "rev": "685e40e1348007d2cf76747a201bab43d86b38cb",
-        "shallow": true,
-        "submodules": true,
-        "type": "git",
-        "url": "https://github.com/nix-community/nix-index-database"
+        "type": "github"
       },
       "original": {
-        "shallow": true,
-        "submodules": true,
-        "type": "git",
-        "url": "https://github.com/nix-community/nix-index-database"
+        "owner": "nix-community",
+        "repo": "nix-index-database",
+        "type": "github"
       }
     },
     "nixpkgs": {
