@@ -55,6 +55,12 @@ nixos-rebuild switch --flake 'git+https://github.com/Zzorz/dotfiles?submodules=1
 
 suppurted hostnames are `playground`, `adguardhome` and `fileserver`
 
+### Just neovim alone
+
+```bash
+nix profile install 'github:zzorz/dotfiles#nixvim'
+```
+
 # Thanks
 
 A huge thank you to [@accelbread](https://github.com/accelbread) for his outstanding work on [flakelight](https://github.com/nix-community/flakelight), which has greatly simplified the structure of this project, making it much neater, cleaner, and easier to understand.
