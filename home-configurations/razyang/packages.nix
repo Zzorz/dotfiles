@@ -2,6 +2,6 @@
 {
   home.packages = with pkgs; [
     radare2
-    taskwarrior
+    inputs.self.packages.${pkgs.system}.nixvim
   ];
 }
