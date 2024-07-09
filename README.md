@@ -60,6 +60,10 @@ suppurted hostnames are `playground`, `adguardhome` and `fileserver`
 ```bash
 nix profile install 'github:zzorz/dotfiles#nixvim'
 ```
+Without install
+```bash
+nix run 'github:zzorz/dotfiles#nixvim'
+```
 
 # Thanks
 
