@@ -46,7 +46,7 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
       options.desc = "Telescope buffer Grap";
     }
     {
-      key = "<space>b";
+      key = "<space>bb";
       action = ''<cmd>Telescope buffers<cr>'';
       options.desc = "Telescope buffer switch";
     }
@@ -61,7 +61,7 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
     ##############################
     ### notify ui
     ##############################
-    notify.enable = true;
+    fidget.enable = true;
     noice = {
       enable = true;
       cmdline.enabled = true;
@@ -124,6 +124,7 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
           gd = "definition";
           gi = "implementation";
           gt = "type_definition";
+          "<space>bf" = "format";
         };
 
       };
@@ -180,8 +181,16 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
     ##############################
     ### edit
     ##############################
-    nvim-autopairs.enable = true;
-    surround = { enable = true; };
+    mini = {
+      enable = true;
+      modules = {
+        ai = { };
+        surround = { };
+        pairs = { };
+      };
+    };
+    comment.enable = true;
+    lualine.enable = true;
     indent-blankline.enable = true;
     which-key = { enable = true; window.border = "rounded"; };
     telescope = { enable = true; };
