@@ -65,6 +65,7 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
     noice = {
       enable = true;
       cmdline.enabled = true;
+      popupmenu.backend = "cmp";
       presets = {
         bottom_search = true;
         long_message_to_split = true;
@@ -184,12 +185,48 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
     indent-blankline.enable = true;
     which-key = { enable = true; window.border = "rounded"; };
     telescope = { enable = true; };
-    multicursors = { enable = true; };
+    multicursors = {
+      enable = true;
+      normalKeys = {
+        "<C-a>".method = false;
+        "<C-n>".method = false;
+        K.method = false;
+        Q.method = false;
+        J.method = false;
+        q.method = false;
+        "[".method = false;
+        "]".method = false;
+        "{".method = false;
+        "}".method = false;
+        "Z".method = false;
+        m = {
+          method = "require('multicursors.normal_mode').find_all_matches";
+          opts = { desc = "Find all"; };
+        };
+      };
+      insertKeys = {
+        "<C-BS>".method = false;
+        "<C-Right>".method = false;
+        "<C-Left>".method = false;
+        "<Up>".method = false;
+        "<Down>".method = false;
+        "<A-f>" = { method = "require('multicursors.insert_mode').C_Right"; opts = { desc = "Word forward"; }; };
+        "<A-b>" = { method = "require('multicursors.insert_mode').C_Left"; opts = { desc = "Word back"; }; };
+        "<C-f>" = { method = "require('multicursors.insert_mode').Right_method"; opts = { desc = "Char forward"; }; };
+        "<C-b>" = { method = "require('multicursors.insert_mode').Left_method"; opts = { desc = "Char forward"; }; };
+        "<C-a>" = { method = "require('multicursors.insert_mode').Home_method"; opts = { desc = "Head of line"; }; };
+        "<C-e>" = { method = "require('multicursors.insert_mode').End_method"; opts = { desc = "End of line"; }; };
+      };
+      extendKeys = {
+        "^".method = false;
+        "0" = { method = "require('multicursors.extend_mode').caret_method"; opts = { desc = "Start of line"; }; };
+      };
+    };
 
     flash = {
       enable = true;
       settings = {
-        labels = "acfgijkmnopqrtuvwz<>@'";
+        labels = "cgjkmnopqrtuvwz<>@'";
         label.rainbow = { enabled = true; shade = 9; };
         modes = {
           char = {
