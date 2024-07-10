@@ -187,6 +187,7 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
         ai = { };
         surround = { };
         pairs = { };
+        starter = { };
       };
     };
     comment.enable = true;
