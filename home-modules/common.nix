@@ -30,6 +30,7 @@
       terminal = "screen-256color";
       plugins = with pkgs.tmuxPlugins; [
         gruvbox
+        extrakto
       ];
       extraConfig = ''
         unbind '"'
@@ -40,7 +41,7 @@
         bind -n M-d select-pane -R
         bind -n M-w select-pane -U
         bind -n M-s select-pane -D
-        set-option -g status-position top
+        set-option -g status-position bottom
         bind-key -T copy-mode-vi v send-keys -X begin-selection
         bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
       '';
