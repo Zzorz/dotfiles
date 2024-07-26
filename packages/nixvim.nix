@@ -1,55 +1,23 @@
-{ inputs, system, ... }:
+{ inputs,pkgs, system, ... }:
 inputs.nixvim.legacyPackages."${system}".makeNixvim {
   viAlias = true;
   vimAlias = true;
-  colorschemes.gruvbox.enable = true;
+  colorschemes.kanagawa = {
+    enable = true;
+    settings = { theme = "wave"; };
+  };
   #diagnostics.virtual_lines.only_current_line = true;
-
-  ##############################
-  ### extra conifigs
-  ##############################
-  extraConfigLua = ''
-    vim.wo.number = true
-    vim.wo.relativenumber = true
-    vim.o.tabstop = 4
-    vim.o.softtabstop = 4
-    vim.o.shiftwidth = 4;
-  '';
 
   ##############################
   ### keymaps
   ##############################
   keymaps = [
-    {
-      key = "vt";
-      action = ''<cmd>lua require("flash").treesitter()<cr>'';
-      options.desc = "Flash Treesitter selection";
-    }
-    {
-      key = "m";
-      action = ''<cmd>MCstart<cr>'';
-      options.desc = "Flash Treesitter selection";
-    }
-    {
-      key = "<space><space>";
-      action = ''<cmd>Telescope find_files<cr>'';
-      options.desc = "Telescope Find File";
-    }
-    {
-      key = "<space>fg";
-      action = ''<cmd>Telescope live_grep<cr>'';
-      options.desc = "Telescope File Grap";
-    }
-    {
-      key = "<space>s";
-      action = ''<cmd>Telescope current_buffer_fuzzy_find<cr>'';
-      options.desc = "Telescope buffer Grap";
-    }
-    {
-      key = "<space>bb";
-      action = ''<cmd>Telescope buffers<cr>'';
-      options.desc = "Telescope buffer switch";
-    }
+    { key = "vt"; action = ''<cmd>lua require("flash").treesitter()<cr>''; options.desc = "Flash Treesitter selection"; }
+    { key = "m"; action = ''<cmd>MCstart<cr>''; options.desc = "Flash Treesitter selection"; }
+    { key = "<space><space>"; action = ''<cmd>Telescope find_files<cr>''; options.desc = "Telescope Find File"; }
+    { key = "<space>fg"; action = ''<cmd>Telescope live_grep<cr>''; options.desc = "Telescope File Grap"; }
+    { key = "<space>s"; action = ''<cmd>Telescope current_buffer_fuzzy_find<cr>''; options.desc = "Telescope buffer Grap"; }
+    { key = "<space>bb"; action = ''<cmd>Telescope buffers<cr>''; options.desc = "Telescope buffer switch"; }
   ];
 
 
@@ -57,7 +25,6 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
   ### plugins
   ##############################
   plugins = {
-
     ##############################
     ### notify ui
     ##############################
@@ -65,7 +32,7 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
     noice = {
       enable = true;
       cmdline.enabled = true;
-      popupmenu.backend = "cmp";
+      popupmenu.backend = "nui";
       presets = {
         bottom_search = true;
         long_message_to_split = true;
@@ -79,7 +46,8 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
     ##############################
     treesitter = {
       enable = true;
-      indent = true;
+      nixGrammars = true;
+      nixvimInjections = true;
       incrementalSelection = {
         enable = true;
         keymaps = {
@@ -89,11 +57,12 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
         };
       };
     };
-    treesitter-refactor = {
-      enable = true;
-      highlightCurrentScope.enable = true;
-      highlightDefinitions.enable = true;
-    };
+    # treesitter-refactor = {
+    #   enable = true;
+    #   #highlightCurrentScope.enable = true;
+    #   highlightDefinitions.enable = true;
+    # };
+    treesitter-context.enable = true;
 
 
     ##############################
@@ -112,6 +81,10 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
         };
         clangd.enable = true;
         gopls.enable = true;
+        cmake.enable = true;
+        yamlls.enable = true;
+        jsonls.enable = true;
+        marksman.enable = true;
       };
       keymaps = {
         diagnostic = {
@@ -129,7 +102,13 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
 
       };
     };
+
+    # [ https://github.com/folke/trouble.nvim ]
+    # A pretty diagnostics list to help you solve all the trouble your code is causing.
     trouble.enable = true;
+
+    # [ https://github.com/onsails/lspkind.nvim ]
+    # The plugin adds vscode-like icons to Neovim LSP completions.
     lspkind.enable = true;
 
     ##############################
@@ -144,12 +123,10 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
       settings = {
         window =
           let
-            window_config = {
-              border = "rounded";
-              scrollbar = false;
-            };
+            window_config = { border = "shadow"; scrollbar = false; };
           in
           { completion = window_config; documentation = window_config; };
+
         snippet = {
           expand = ''
             function(args)
@@ -158,9 +135,7 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
           '';
         };
 
-        completion = {
-          completeopt = "menu,menuone,noinsert";
-        };
+        completion = { completeopt = "menu,menuone,noinsert"; };
         mapping = {
           "<C-n>" = "cmp.mapping.select_next_item()";
           "<C-p>" = "cmp.mapping.select_prev_item()";
@@ -187,13 +162,12 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
         ai = { };
         surround = { };
         pairs = { };
-        starter = { };
+        cursorword = { };
       };
     };
-    comment.enable = true;
     lualine.enable = true;
-    indent-blankline.enable = true;
-    which-key = { enable = true; window.border = "rounded"; };
+    comment.enable = true;
+    which-key = { enable = true; window.border = "shadow"; };
     telescope = { enable = true; };
     multicursors = {
       enable = true;
@@ -250,11 +224,62 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
             };
           };
           search = { enabled = true; };
-          treesitter = {
-            enabled = true;
-          };
+          treesitter = { enabled = true; };
         };
       };
     };
+
+    # [ https://github.com/NvChad/nvim-colorizer.lua ]
+    # A high-performance color highlighter which has no external dependencies!.
+    nvim-colorizer.enable = true;
   };
+  ##############################
+  ### extra plugins
+  ##############################
+  extraPlugins = [
+    (pkgs.vimUtils.buildVimPlugin {
+      name = "hlchunk";
+      src = pkgs.fetchFromGitHub {
+        owner = "shellRaining";
+        repo = "hlchunk.nvim";
+        rev = "v1.3.0";
+        hash = "sha256-UGxrfFuLJETL/KJNY9k4zehxb6RrXC6UZxnG+7c9JXw=";
+      };
+    })
+    pkgs.vimPlugins.tabout-nvim
+  ];
+  ##############################
+  ### extra conifigs
+  ##############################
+  extraConfigLuaPost = ''
+    vim.wo.number = true
+    vim.wo.relativenumber = true
+    vim.o.tabstop = 4
+    vim.o.softtabstop = 4
+    vim.o.shiftwidth = 4
+
+    require('hlchunk').setup({
+      chunk = {
+        enable = true,
+        use_treesitter = true,
+        duration = 50,
+        delay = 10,
+        chars = {
+          right_arrow = "",
+        },
+        style = "#f88800",
+      },
+      line_num = {
+        enable = true,
+        use_treesitter = true,
+        style = "#f88800",
+      },
+    })
+
+    require('tabout').setup({
+      tabkey = '<Tab>',
+      backwards_tabkey = '<S-Tab>',
+      ignore_beginning = true,
+    })
+  '';
 }
