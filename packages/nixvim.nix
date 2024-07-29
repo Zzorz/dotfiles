@@ -18,6 +18,22 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
     { key = "<space>fg"; action = ''<cmd>Telescope live_grep<cr>''; options.desc = "Telescope File Grap"; }
     { key = "<space>s"; action = ''<cmd>Telescope current_buffer_fuzzy_find<cr>''; options.desc = "Telescope buffer Grap"; }
     { key = "<space>bb"; action = ''<cmd>Telescope buffers<cr>''; options.desc = "Telescope buffer switch"; }
+    { key = "<Tab>"; action.__raw = ''
+      function()
+        if vim.snippet.active({direction=1}) then
+          vim.schedule(function() vim.snippet.jump(1) end)
+        return
+        end
+      end
+    '';  }
+    { key = "<S-Tab>"; action.__raw = ''
+      function()
+        if vim.snippet.active({direction=-1}) then
+          vim.schedule(function() vim.snippet.jump(-1) end)
+        return
+        end
+      end
+    '';  }
   ];
 
 
@@ -127,14 +143,6 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
           in
           { completion = window_config; documentation = window_config; };
 
-        snippet = {
-          expand = ''
-            function(args)
-              require('luasnip').lsp_expand(args.body)
-            end
-          '';
-        };
-
         completion = { completeopt = "menu,menuone,noinsert"; };
         mapping = {
           "<C-n>" = "cmp.mapping.select_next_item()";
@@ -232,6 +240,10 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
     # [ https://github.com/NvChad/nvim-colorizer.lua ]
     # A high-performance color highlighter which has no external dependencies!.
     nvim-colorizer.enable = true;
+
+    # [ https://github.com/rafamadriz/friendly-snippets ]
+    # Set of preconfigured snippets for different languages.
+    friendly-snippets.enable = true;
   };
   ##############################
   ### extra plugins
@@ -244,6 +256,15 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
         repo = "hlchunk.nvim";
         rev = "v1.3.0";
         hash = "sha256-UGxrfFuLJETL/KJNY9k4zehxb6RrXC6UZxnG+7c9JXw=";
+      };
+    })
+    (pkgs.vimUtils.buildVimPlugin {
+      name = "nvim-snippets";
+      src = pkgs.fetchFromGitHub {
+        owner = "garymjr";
+        repo = "nvim-snippets";
+        rev = "v1.0.0";
+        hash = "sha256-1/XgOCTFxFp72WkAMe3MkGcWjSw/xJ7OJvqiN/qT5RE=";
       };
     })
     pkgs.vimPlugins.tabout-nvim
@@ -275,6 +296,8 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
         style = "#f88800",
       },
     })
+
+    require('snippets').setup()
 
     require('tabout').setup({
       tabkey = '<Tab>',
