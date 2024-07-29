@@ -122,13 +122,15 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
 
     # [ https://github.com/onsails/lspkind.nvim ]
     # The plugin adds vscode-like icons to Neovim LSP completions.
-    lspkind.enable = true;
+    lspkind = {
+      enable = true;
+      mode = "symbol";
+    };
+
 
     ##############################
     ### completion
     ##############################
-    cmp_luasnip = { enable = true; };
-    luasnip = { enable = true; };
     cmp-nvim-lsp = { enable = true; };
     cmp-path = { enable = true; };
     cmp = {
@@ -136,7 +138,7 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
       settings = {
         window =
           let
-            window_config = { border = "shadow"; scrollbar = false; };
+            window_config = { border = "rounded"; scrollbar = false; };
           in
           { completion = window_config; documentation = window_config; };
 
@@ -152,7 +154,6 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
 
         sources = [
           { name = "nvim_lsp"; }
-          { name = "luasnip"; }
           { name = "path"; }
         ];
       };
@@ -172,7 +173,7 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
     };
     lualine.enable = true;
     comment.enable = true;
-    which-key = { enable = true; window.border = "shadow"; };
+    which-key = { enable = true; window.border = "rounded"; };
     telescope = {
       enable = true;
       extensions = {
