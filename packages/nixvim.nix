@@ -2,10 +2,6 @@
 inputs.nixvim.legacyPackages."${system}".makeNixvim {
   viAlias = true;
   vimAlias = true;
-  colorschemes.kanagawa = {
-    enable = true;
-    settings = { theme = "wave"; };
-  };
   #diagnostics.virtual_lines.only_current_line = true;
 
   ##############################
@@ -237,10 +233,6 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
       };
     };
 
-    # [ https://github.com/NvChad/nvim-colorizer.lua ]
-    # A high-performance color highlighter which has no external dependencies!.
-    nvim-colorizer.enable = true;
-
     # [ https://github.com/rafamadriz/friendly-snippets ]
     # Set of preconfigured snippets for different languages.
     friendly-snippets.enable = true;
@@ -268,6 +260,8 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
       };
     })
     pkgs.vimPlugins.tabout-nvim
+    pkgs.vimPlugins.nvim-highlight-colors
+    pkgs.vimPlugins.gruvbox-baby
   ];
   ##############################
   ### extra conifigs
@@ -278,6 +272,7 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
     vim.o.tabstop = 4
     vim.o.softtabstop = 4
     vim.o.shiftwidth = 4
+    vim.opt.termguicolors = true
 
     require('hlchunk').setup({
       chunk = {
@@ -295,6 +290,9 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
         use_treesitter = true,
         style = "#f88800",
       },
+      indent = {
+        enable = true,
+      },
     })
 
     require('snippets').setup()
@@ -304,5 +302,11 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
       backwards_tabkey = '<S-Tab>',
       ignore_beginning = true,
     })
+
+    require('nvim-highlight-colors').setup({})
+
+    vim.g.gruvbox_baby_telescope_theme = 1
+    vim.g.gruvbox_baby_background_color = "dark"
+    vim.cmd[[colorscheme gruvbox-baby]]
   '';
 }
