@@ -13,6 +13,7 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
     { key = "<space><space>"; action = ''<cmd>Telescope find_files<cr>''; options.desc = "Telescope Find File"; }
     { key = "<space>fg"; action = ''<cmd>Telescope live_grep<cr>''; options.desc = "Telescope File Grap"; }
     { key = "<space>s"; action = ''<cmd>Telescope current_buffer_fuzzy_find<cr>''; options.desc = "Telescope buffer Grap"; }
+    { key = "<space>u"; action = ''<cmd>Telescope undo<cr>''; options.desc = "Telescope undo"; }
     { key = "<space>bb"; action = ''<cmd>Telescope buffers<cr>''; options.desc = "Telescope buffer switch"; }
     { key = "<Tab>"; action.__raw = ''
       function()
@@ -172,7 +173,14 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
     lualine.enable = true;
     comment.enable = true;
     which-key = { enable = true; window.border = "shadow"; };
-    telescope = { enable = true; };
+    telescope = {
+      enable = true;
+      extensions = {
+        undo = {
+          enable = true;
+        };
+      };
+    };
     multicursors = {
       enable = true;
       normalKeys = {
