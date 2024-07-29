@@ -270,6 +270,7 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
     pkgs.vimPlugins.tabout-nvim
     pkgs.vimPlugins.nvim-highlight-colors
     pkgs.vimPlugins.gruvbox-baby
+    pkgs.vimPlugins.guess-indent-nvim
   ];
   ##############################
   ### extra conifigs
@@ -312,6 +313,7 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
     })
 
     require('nvim-highlight-colors').setup({})
+    require('guess-indent').setup({})
 
     vim.g.gruvbox_baby_telescope_theme = 1
     vim.g.gruvbox_baby_background_color = "dark"
