@@ -52,7 +52,7 @@
       zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
       zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS}
       CASE_SENSITIVE="true"
-      export PATH=$PATH:~/.local/bin
+      export PATH=~/.local/bin:$PATH
     '';
   };
 }

@@ -2,7 +2,6 @@
 inputs.nixvim.legacyPackages."${system}".makeNixvim {
   viAlias = true;
   vimAlias = true;
-  #diagnostics.virtual_lines.only_current_line = true;
 
   ##############################
   ### keymaps
@@ -15,6 +14,7 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
     { key = "<space>s"; action = ''<cmd>Telescope current_buffer_fuzzy_find<cr>''; options.desc = "Telescope buffer Grap"; }
     { key = "<space>u"; action = ''<cmd>Telescope undo<cr>''; options.desc = "Telescope undo"; }
     { key = "<space>bb"; action = ''<cmd>Telescope buffers<cr>''; options.desc = "Telescope buffer switch"; }
+    { key = "<space>bs"; action = ''<cmd>Trouble symbols toggle<cr>''; options.desc = "Trouble symbols toggle"; }
     { key = "<Tab>"; action.__raw = ''
       function()
         if vim.snippet.active({direction=1}) then
@@ -45,7 +45,6 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
     noice = {
       enable = true;
       cmdline.enabled = true;
-      popupmenu.backend = "nui";
       presets = {
         bottom_search = true;
         long_message_to_split = true;
@@ -83,6 +82,8 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
     ##############################
     lsp = {
       enable = true;
+      capabilities = "require('cmp_nvim_lsp').default_capabilities()";
+      inlayHints = true;
       servers = {
         bashls.enable = true;
         nil-ls.enable = true;
@@ -124,7 +125,9 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
     # The plugin adds vscode-like icons to Neovim LSP completions.
     lspkind = {
       enable = true;
-      mode = "symbol";
+      symbolMap = {
+        Copilot = "";
+      };
     };
 
 
@@ -153,10 +156,24 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
         };
 
         sources = [
+          { name = "copilot"; }
           { name = "nvim_lsp"; }
           { name = "path"; }
         ];
       };
+    };
+
+    copilot-lua = {
+      enable = true;
+      panel.enabled = false;
+      suggestion.enabled = false;
+      # suggestion = {
+      #   autoTrigger = true;
+      #   keymap.accept = "<Enter>";
+      # };
+    };
+    copilot-cmp = {
+      enable = true;
     };
 
     ##############################
@@ -319,5 +336,6 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
     vim.g.gruvbox_baby_telescope_theme = 1
     vim.g.gruvbox_baby_background_color = "dark"
     vim.cmd[[colorscheme gruvbox-baby]]
+
   '';
 }
