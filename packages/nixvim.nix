@@ -1,7 +1,10 @@
-{ inputs,pkgs, system, ... }:
+{ inputs, pkgs, system, ... }:
 inputs.nixvim.legacyPackages."${system}".makeNixvim {
   viAlias = true;
   vimAlias = true;
+  clipboard.providers = {
+    xsel.enable = true;
+  };
 
   ##############################
   ### keymaps
@@ -15,22 +18,29 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
     { key = "<space>u"; action = ''<cmd>Telescope undo<cr>''; options.desc = "Telescope undo"; }
     { key = "<space>bb"; action = ''<cmd>Telescope buffers<cr>''; options.desc = "Telescope buffer switch"; }
     { key = "<space>bs"; action = ''<cmd>Trouble symbols toggle<cr>''; options.desc = "Trouble symbols toggle"; }
-    { key = "<Tab>"; action.__raw = ''
-      function()
-        if vim.snippet.active({direction=1}) then
-          vim.schedule(function() vim.snippet.jump(1) end)
-        return
+    { key = "<space>ca"; action = ''<cmd>lua vim.lsp.buf.code_action()<CR>''; options.desc = "Telescope buffer switch"; }
+    {
+      key = "<Tab>";
+      action.__raw = ''
+        function()
+          if vim.snippet.active({direction=1}) then
+            vim.schedule(function() vim.snippet.jump(1) end)
+          return
+          end
         end
-      end
-    '';  }
-    { key = "<S-Tab>"; action.__raw = ''
-      function()
-        if vim.snippet.active({direction=-1}) then
-          vim.schedule(function() vim.snippet.jump(-1) end)
-        return
+      '';
+    }
+    {
+      key = "<S-Tab>";
+      action.__raw = ''
+        function()
+          if vim.snippet.active({direction=-1}) then
+            vim.schedule(function() vim.snippet.jump(-1) end)
+          return
+          end
         end
-      end
-    '';  }
+      '';
+    }
   ];
 
 
@@ -60,12 +70,15 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
       enable = true;
       nixGrammars = true;
       nixvimInjections = true;
-      incrementalSelection = {
-        enable = true;
-        keymaps = {
-          initSelection = "vv";
-          nodeIncremental = "e";
-          nodeDecremental = "b";
+      settings = {
+        incremental_selection = {
+          enable = true;
+          keymaps = {
+            init_selection = "vv";
+            node_incremental = "e";
+            node_decremental = "b";
+            scope_incremental = "E";
+          };
         };
       };
     };
@@ -74,7 +87,7 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
     #   #highlightCurrentScope.enable = true;
     #   highlightDefinitions.enable = true;
     # };
-    treesitter-context.enable = true;
+    #treesitter-context.enable = true;
 
 
     ##############################
@@ -193,8 +206,12 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
     which-key = { enable = true; window.border = "rounded"; };
     telescope = {
       enable = true;
+      enabledExtensions = [ "ui-select" ];
       extensions = {
         undo = {
+          enable = true;
+        };
+        ui-select = {
           enable = true;
         };
       };
@@ -304,7 +321,7 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
     require('hlchunk').setup({
       chunk = {
         enable = true,
-        use_treesitter = true,
+        use_treesitter = false,
         duration = 50,
         delay = 10,
         chars = {
@@ -314,11 +331,8 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
       },
       line_num = {
         enable = true,
-        use_treesitter = true,
+        use_treesitter = false,
         style = "#f88800",
-      },
-      indent = {
-        enable = true,
       },
     })
 
