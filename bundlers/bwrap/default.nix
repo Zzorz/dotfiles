@@ -4,41 +4,48 @@ let
     #!/bin/sh
     prog_name=$(basename $0)
     prog_path=$(dirname $(realpath $0))
-    mountpoint=''${mountpoint:-/opt/${drv.name}/nix}
+    bundle_path=$(dirname $prog_path)
+    mountpoint=$bundle_path/nix
 
-    ctrl_c() {
-        umount $mountpoint
-        rmdir $mountpoint
-    }
-    trap ctrl_c INT
-
-
-
-
+    
     if [ "$prog_name" = "${drv.name}" ]
     then
-        prog_name=sh
+        prog_name=''${SHELL##*/}
     fi
 
-    $prog_path/bwrap \
+    $prog_path/.bwrap \
       --dev-bind / / \
       --unsetenv PATH \
-      --setenv PATH ${drv}/bin/:${pkgs.pkgsStatic.dash}/bin/:$PATH \
+      --setenv PATH ${drv}/bin/:$PATH \
       --ro-bind "$mountpoint" /nix \
       $prog_name "$@"
   '';
 in
 stdenv.mkDerivation {
-  name = drv.name;
+  name = drv.name+".tar.gz";
   closureInfo = pkgs.closureInfo { rootPaths = [ drv ]; };
   bundledDrv = drv;
-  buildCommand = ''
-    mkdir $out
-    tar cf - $(< $closureInfo/store-paths) > $out/${drv.name}.tar
-    tar rf $out/${drv.name}.tar -C ${entry-script} bin/${drv.name}
-    tar rf $out/${drv.name}.tar -C ${pkgs.pkgsStatic.bubblewrap} bin/bwrap 
-    tar --transform "s|/bin/dash|/bin/sh|" -rf $out/${drv.name}.tar ${pkgs.pkgsStatic.dash}/bin/dash
-    gzip $out/${drv.name}.tar 
+  src = ./.;
+  buildPhase= ''
+    mkdir -p ${drv.name}/bin
+    cp ${entry-script}/bin/${drv.name} ${drv.name}/bin
+
+    cd ${drv.name}/bin
+    for each in $(ls ${drv}/bin);do
+      base=$(basename $each)
+      if [ "${drv.name}" != $base ];then
+        ln -s ${drv.name} $each 
+      fi
+    done
+    cd ../../
+    cp ${pkgs.pkgsStatic.bubblewrap}/bin/bwrap  ${drv.name}/bin/.bwrap
+
+    cd ${drv.name}
+    tar cf - $(< $closureInfo/store-paths) | tar xf -
+    cd ../
+  '';
+  installPhase = ''
+    tar czf $out ${drv.name}
   '';
 }
 
