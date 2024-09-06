@@ -5,7 +5,9 @@
     nixpkgs = {
       url = "github:NixOS/nixpkgs/nixos-unstable";
     };
-
+    nixpkgs-stable = {
+      url = "github:NixOS/nixpkgs/nixos-24.05";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -30,16 +32,25 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    emacs-overlay = {
+      url = "github:nix-community/emacs-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs-stable.follows = "nixpkgs-stable";
+    };
   };
 
-  outputs = { flakelight, ... }@inputs:
-    flakelight ./. ({ lib, ... }: {
+  outputs = { ... }@inputs:
+    inputs.flakelight ./. ({ lib, ... }: {
       inherit inputs;
       systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" ];
       nixDir = ./.;
       nixpkgs.config = {
         allowUnfree = true;
       };
+      withOverlays = [
+        inputs.emacs-overlay.overlays.default
+      ];
       nixDirAliases = {
         packages = [ "packages" ];
         devShells = [ "dev-shells" ];

@@ -100,7 +100,7 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
       servers = {
         bashls.enable = true;
         nil-ls.enable = true;
-        pyright.enable = true;
+        pylsp.enable = true;
         rust-analyzer = {
           enable = true;
           installCargo = true;
@@ -111,6 +111,7 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
         cmake.enable = true;
         yamlls.enable = true;
         jsonls.enable = true;
+        denols.enable = true;
         marksman.enable = true;
       };
       keymaps = {
@@ -350,6 +351,8 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
     vim.g.gruvbox_baby_telescope_theme = 1
     vim.g.gruvbox_baby_background_color = "dark"
     vim.cmd[[colorscheme gruvbox-baby]]
-
+  '';
+  extraConfigVim = ''
+    set fileencodings=utf-8,gbk,gb18030,gb2312,ucs-bom,cp936,big5,euc-jp,euc-kr
   '';
 }
