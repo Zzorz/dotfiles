@@ -66,6 +66,15 @@ Without install
 ```bash
 nix run 'github:zzorz/dotfiles#nixvim'
 ```
+# pack any executable in nixpkgs and run it anywhre
+here's a nix bundler in this project which base on bwrap and erofs-utils, it's simple but very useful:
+
+```bash
+$ nix bundle --bundler 'github:Zzorz/dotfiles#bwrap' 'nixpkgs#nginx'
+$ nginx-1.26.2.tar.gz
+$ ./nginx-1.26.2 -v
+nginx version: nginx/1.26.2
+```
 
 # Thanks
 

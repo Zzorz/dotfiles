@@ -73,7 +73,20 @@
     ripgrep.enable = true;
     broot.enable = true;
     bottom.enable = true;
-    helix.enable = true;
+    helix =  {
+      enable = true;
+      settings = {
+        theme = "gruvbox_dark_soft";
+        editor = {
+          line-number = "relative";
+          lsp = {
+            display-messages = true;
+            display-inlay-hints = true;
+          };
+       };
+      };
+    };
+
     lsd = {
       enable = true;
       enableAliases = true;

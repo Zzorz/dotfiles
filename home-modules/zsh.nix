@@ -53,6 +53,7 @@
       zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS}
       CASE_SENSITIVE="true"
       export PATH=~/.local/bin:$PATH
+      bindkey "^J" accept-line
     '';
   };
 }
