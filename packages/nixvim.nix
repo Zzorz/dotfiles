@@ -61,6 +61,7 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
         lsp_doc_border = true;
       };
     };
+    web-devicons.enable = true;
 
 
     ##############################
@@ -99,9 +100,9 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
       inlayHints = true;
       servers = {
         bashls.enable = true;
-        nil-ls.enable = true;
+        nil_ls.enable = true;
         pyright.enable = true;
-        rust-analyzer = {
+        rust_analyzer = {
           enable = true;
           installCargo = true;
           installRustc = true;
@@ -203,7 +204,7 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
     };
     lualine.enable = true;
     comment.enable = true;
-    which-key = { enable = true; window.border = "rounded"; };
+    which-key = { enable = true; settings.win.border = "rounded"; };
     telescope = {
       enable = true;
       enabledExtensions = [ "ui-select" ];

@@ -12,6 +12,10 @@
       from = { id = "home-manager"; type = "indirect"; };
       flake = inputs.home-manager;
     };
+    emacs-overlay = {
+      from = { id = "emacs-overlay"; type = "indirect"; };
+      flake = inputs.emacs-overlay;
+    };
   };
   programs = {
     pyenv.enable = true;
