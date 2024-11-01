@@ -8,18 +8,8 @@
   networking = {
     resolvconf.enable = false;
     hostName = "playground";
-    nameservers = [ "172.16.0.2" ];
-    defaultGateway = {
-      address = "172.16.0.1";
-      interface = "ens18";
-    };
-    interfaces = {
-      ens18 = {
-        ipv4.addresses = [
-          { address = "172.16.0.110"; prefixLength = 16; }
-        ];
-      };
-    };
+	useDHCP = true;
+	enableIPv6 = true;
   };
   # Define a user account. Don't forget to set a password with ‘passwd’.
   #programs.zsh.enable
