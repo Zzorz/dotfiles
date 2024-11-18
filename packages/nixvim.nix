@@ -1,4 +1,9 @@
-{ inputs, pkgs, system, ... }:
+{
+  inputs,
+  pkgs,
+  system,
+  ...
+}:
 inputs.nixvim.legacyPackages."${system}".makeNixvim {
   viAlias = true;
   vimAlias = true;
@@ -10,15 +15,51 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
   ### keymaps
   ##############################
   keymaps = [
-    { key = "vt"; action = ''<cmd>lua require("flash").treesitter()<cr>''; options.desc = "Flash Treesitter selection"; }
-    { key = "m"; action = ''<cmd>MCstart<cr>''; options.desc = "Flash Treesitter selection"; }
-    { key = "<space><space>"; action = ''<cmd>Telescope find_files<cr>''; options.desc = "Telescope Find File"; }
-    { key = "<space>fg"; action = ''<cmd>Telescope live_grep<cr>''; options.desc = "Telescope File Grap"; }
-    { key = "<space>s"; action = ''<cmd>Telescope current_buffer_fuzzy_find<cr>''; options.desc = "Telescope buffer Grap"; }
-    { key = "<space>u"; action = ''<cmd>Telescope undo<cr>''; options.desc = "Telescope undo"; }
-    { key = "<space>bb"; action = ''<cmd>Telescope buffers<cr>''; options.desc = "Telescope buffer switch"; }
-    { key = "<space>bs"; action = ''<cmd>Trouble symbols toggle<cr>''; options.desc = "Trouble symbols toggle"; }
-    { key = "<space>ca"; action = ''<cmd>lua vim.lsp.buf.code_action()<CR>''; options.desc = "Telescope buffer switch"; }
+    {
+      key = "vt";
+      action = ''<cmd>lua require("flash").treesitter()<cr>'';
+      options.desc = "Flash Treesitter selection";
+    }
+    {
+      key = "m";
+      action = ''<cmd>MCstart<cr>'';
+      options.desc = "Flash Treesitter selection";
+    }
+    {
+      key = "<space><space>";
+      action = ''<cmd>Telescope find_files<cr>'';
+      options.desc = "Telescope Find File";
+    }
+    {
+      key = "<space>fg";
+      action = ''<cmd>Telescope live_grep<cr>'';
+      options.desc = "Telescope File Grap";
+    }
+    {
+      key = "<space>s";
+      action = ''<cmd>Telescope current_buffer_fuzzy_find<cr>'';
+      options.desc = "Telescope buffer Grap";
+    }
+    {
+      key = "<space>u";
+      action = ''<cmd>Telescope undo<cr>'';
+      options.desc = "Telescope undo";
+    }
+    {
+      key = "<space>bb";
+      action = ''<cmd>Telescope buffers<cr>'';
+      options.desc = "Telescope buffer switch";
+    }
+    {
+      key = "<space>bs";
+      action = ''<cmd>Trouble symbols toggle<cr>'';
+      options.desc = "Trouble symbols toggle";
+    }
+    {
+      key = "<space>ca";
+      action = ''<cmd>lua vim.lsp.buf.code_action()<CR>'';
+      options.desc = "Telescope buffer switch";
+    }
     {
       key = "<Tab>";
       action.__raw = ''
@@ -43,7 +84,6 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
     }
   ];
 
-
   ##############################
   ### plugins
   ##############################
@@ -62,7 +102,6 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
       };
     };
     web-devicons.enable = true;
-
 
     ##############################
     ### treesitter
@@ -89,7 +128,6 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
     #   highlightDefinitions.enable = true;
     # };
     #treesitter-context.enable = true;
-
 
     ##############################
     ### lsp config
@@ -145,22 +183,33 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
       };
     };
 
-
     ##############################
     ### completion
     ##############################
-    cmp-nvim-lsp = { enable = true; };
-    cmp-path = { enable = true; };
+    cmp-nvim-lsp = {
+      enable = true;
+    };
+    cmp-path = {
+      enable = true;
+    };
     cmp = {
       enable = true;
       settings = {
         window =
           let
-            window_config = { border = "rounded"; scrollbar = false; };
+            window_config = {
+              border = "rounded";
+              scrollbar = false;
+            };
           in
-          { completion = window_config; documentation = window_config; };
+          {
+            completion = window_config;
+            documentation = window_config;
+          };
 
-        completion = { completeopt = "menu,menuone,noinsert"; };
+        completion = {
+          completeopt = "menu,menuone,noinsert";
+        };
         mapping = {
           "<C-n>" = "cmp.mapping.select_next_item()";
           "<C-p>" = "cmp.mapping.select_prev_item()";
@@ -205,7 +254,10 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
     };
     lualine.enable = true;
     comment.enable = true;
-    which-key = { enable = true; settings.win.border = "rounded"; };
+    which-key = {
+      enable = true;
+      settings.win.border = "rounded";
+    };
     telescope = {
       enable = true;
       enabledExtensions = [ "ui-select" ];
@@ -234,7 +286,9 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
         "Z".method = false;
         m = {
           method = "require('multicursors.normal_mode').find_all_matches";
-          opts = { desc = "Find all"; };
+          opts = {
+            desc = "Find all";
+          };
         };
       };
       insertKeys = {
@@ -243,16 +297,51 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
         "<C-Left>".method = false;
         "<Up>".method = false;
         "<Down>".method = false;
-        "<A-f>" = { method = "require('multicursors.insert_mode').C_Right"; opts = { desc = "Word forward"; }; };
-        "<A-b>" = { method = "require('multicursors.insert_mode').C_Left"; opts = { desc = "Word back"; }; };
-        "<C-f>" = { method = "require('multicursors.insert_mode').Right_method"; opts = { desc = "Char forward"; }; };
-        "<C-b>" = { method = "require('multicursors.insert_mode').Left_method"; opts = { desc = "Char forward"; }; };
-        "<C-a>" = { method = "require('multicursors.insert_mode').Home_method"; opts = { desc = "Head of line"; }; };
-        "<C-e>" = { method = "require('multicursors.insert_mode').End_method"; opts = { desc = "End of line"; }; };
+        "<A-f>" = {
+          method = "require('multicursors.insert_mode').C_Right";
+          opts = {
+            desc = "Word forward";
+          };
+        };
+        "<A-b>" = {
+          method = "require('multicursors.insert_mode').C_Left";
+          opts = {
+            desc = "Word back";
+          };
+        };
+        "<C-f>" = {
+          method = "require('multicursors.insert_mode').Right_method";
+          opts = {
+            desc = "Char forward";
+          };
+        };
+        "<C-b>" = {
+          method = "require('multicursors.insert_mode').Left_method";
+          opts = {
+            desc = "Char forward";
+          };
+        };
+        "<C-a>" = {
+          method = "require('multicursors.insert_mode').Home_method";
+          opts = {
+            desc = "Head of line";
+          };
+        };
+        "<C-e>" = {
+          method = "require('multicursors.insert_mode').End_method";
+          opts = {
+            desc = "End of line";
+          };
+        };
       };
       extendKeys = {
         "^".method = false;
-        "0" = { method = "require('multicursors.extend_mode').caret_method"; opts = { desc = "Start of line"; }; };
+        "0" = {
+          method = "require('multicursors.extend_mode').caret_method";
+          opts = {
+            desc = "Start of line";
+          };
+        };
       };
     };
 
@@ -260,7 +349,10 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
       enable = true;
       settings = {
         labels = "cgjkmnopqrtuvwz<>@'";
-        label.rainbow = { enabled = true; shade = 9; };
+        label.rainbow = {
+          enabled = true;
+          shade = 9;
+        };
         modes = {
           char = {
             enabled = true;
@@ -272,8 +364,12 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
               __unkeyed-5 = ",";
             };
           };
-          search = { enabled = true; };
-          treesitter = { enabled = true; };
+          search = {
+            enabled = true;
+          };
+          treesitter = {
+            enabled = true;
+          };
         };
       };
     };

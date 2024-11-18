@@ -1,24 +1,33 @@
 { pkgs, inputs, ... }:
 {
-  imports = with inputs.self.homeModules; [
-    zsh
+  imports = [
+    ./zsh.nix
   ];
   nix.registry = {
     nixpkgs = {
-      from = { id = "nixpkgs"; type = "indirect"; };
+      from = {
+        id = "nixpkgs";
+        type = "indirect";
+      };
       flake = inputs.nixpkgs;
     };
+    nixpkgs-stable = {
+      from = {
+        id = "nixpkgs-stable";
+        type = "indirect";
+      };
+      flake = inputs.nixpkgs-stable;
+    };
     home-manager = {
-      from = { id = "home-manager"; type = "indirect"; };
+      from = {
+        id = "home-manager";
+        type = "indirect";
+      };
       flake = inputs.home-manager;
     };
-    emacs-overlay = {
-      from = { id = "emacs-overlay"; type = "indirect"; };
-      flake = inputs.emacs-overlay;
-    };
   };
+
   programs = {
-    pyenv.enable = true;
     git = {
       userName = "RazYang";
       userEmail = "xzzorz@gmail.com";
@@ -32,6 +41,7 @@
       keyMode = "vi";
       prefix = "C-q";
       terminal = "screen-256color";
+      shell = "${pkgs.nushell}/bin/nu";
       plugins = with pkgs.tmuxPlugins; [
         gruvbox
         extrakto
@@ -50,8 +60,14 @@
         bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
       '';
     };
-    zoxide = { enable = true; enableZshIntegration = true; };
-    fzf = { enable = true; enableZshIntegration = true; };
+    zoxide = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+    fzf = {
+      enable = true;
+      enableZshIntegration = true;
+    };
     command-not-found = {
       enable = true;
       dbPath = inputs.flake-programs-sqlite.packages.${pkgs.system}.programs-sqlite;
@@ -61,31 +77,10 @@
       enableZshIntegration = false;
       enableBashIntegration = false;
     };
-    atuin = {
-      enable = true;
-      settings = {
-        daemon = {
-          enabled = pkgs.system != "aarch64-darwin";
-        };
-      };
-    };
     navi.enable = true;
     ripgrep.enable = true;
     broot.enable = true;
     bottom.enable = true;
-    helix =  {
-      enable = true;
-      settings = {
-        theme = "gruvbox_dark_soft";
-        editor = {
-          line-number = "relative";
-          lsp = {
-            display-messages = true;
-            display-inlay-hints = true;
-          };
-       };
-      };
-    };
 
     lsd = {
       enable = true;
