@@ -2,10 +2,14 @@
 {
   "root@playground" = import ./root {
     inherit inputs;
-    pkgs = (pkgsWithSystem "x86_64-linux");
+    pkgs = pkgsWithSystem "x86_64-linux";
   };
   "yang@0xdeadbeef.local" = import ./yang {
     inherit inputs;
-    pkgs = (pkgsWithSystem "aarch64-darwin");
+    pkgs = pkgsWithSystem "aarch64-darwin";
+  };
+  "ctf@0xdeadbeef" = import ./ctf {
+    inherit inputs;
+    pkgs = pkgsWithSystem "x86_64-linux";
   };
 }

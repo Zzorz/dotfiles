@@ -1,4 +1,10 @@
-{ pkgs, stdenv, writeScriptBin, ... }: drv:
+{
+  pkgs,
+  stdenv,
+  writeScriptBin,
+  ...
+}:
+drv:
 let
   entry-script = writeScriptBin "${drv.pname}-entry" ''
     #!/bin/sh
@@ -41,9 +47,14 @@ let
   '';
 in
 stdenv.mkDerivation {
-  pname = drv.pname;
-  version = drv.version;
-  closureInfo = pkgs.closureInfo { rootPaths = [ drv pkgs.bash ]; };
+  inherit (drv) pname;
+  inherit (drv) version;
+  closureInfo = pkgs.closureInfo {
+    rootPaths = [
+      drv
+      pkgs.bash
+    ];
+  };
   bundledDrv = drv;
   buildCommand = ''
     mkdir -p $out/bin/.utils
@@ -62,4 +73,3 @@ stdenv.mkDerivation {
     done
   '';
 }
-

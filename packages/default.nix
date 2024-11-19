@@ -6,7 +6,7 @@ rec {
   test = callPackage ./test { };
   testStatic = callPackage ./test { static = true; };
   nixvim = callPackage ./nixvim.nix { };
-  hello = pkgs.hello;
-  mongodb = pkgs.mongodb;
+  inherit (pkgs) hello;
+  inherit (pkgs) mongodb;
   default = hello;
 }

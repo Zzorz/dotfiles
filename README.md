@@ -8,8 +8,9 @@ Razyang's dotfiles managed by nix and home-manager.
 nix flake show "github:zzorz/dotfiles"
 ```
 
-or using `nix repl`, `:lf "github:zzorz/dotfiles"` function.
-or using git to download this flake `nix flake show "git+https://github.com/Zzorz/dotfiles?submodules=1&shallow=1"`
+or using `nix repl`, `:lf "github:zzorz/dotfiles"` function. or using git to
+download this flake
+`nix flake show "git+https://github.com/Zzorz/dotfiles?submodules=1&shallow=1"`
 
 # Installation
 
@@ -66,8 +67,11 @@ Without install
 ```bash
 nix run 'github:zzorz/dotfiles#nixvim'
 ```
+
 # pack any executable in nixpkgs and run it anywhre
-here's a nix bundler in this project which base on bwrap and erofs-utils, it's simple but very useful:
+
+here's a nix bundler in this project which base on bwrap and erofs-utils, it's
+simple but very useful:
 
 ```bash
 $ nix bundle --bundler 'github:Zzorz/dotfiles#bwrap' 'nixpkgs#nginx'
@@ -78,4 +82,7 @@ nginx version: nginx/1.26.2
 
 # Thanks
 
-A huge thank you to [@accelbread](https://github.com/accelbread) for his outstanding work on [flakelight](https://github.com/nix-community/flakelight), which has greatly simplified the structure of this project, making it much neater, cleaner, and easier to understand.
+A huge thank you to [@accelbread](https://github.com/accelbread) for his
+outstanding work on [flakelight](https://github.com/nix-community/flakelight),
+which has greatly simplified the structure of this project, making it much
+neater, cleaner, and easier to understand.

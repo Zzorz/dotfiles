@@ -1,4 +1,9 @@
-{ pkgs, inputs, system, ... }:
+{
+  pkgs,
+  inputs,
+  system,
+  ...
+}:
 pkgs.dockerTools.buildImage {
   name = "qemu";
   tag = "9.0.0";

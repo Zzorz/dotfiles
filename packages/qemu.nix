@@ -1,4 +1,9 @@
-{ lib, stdenv, fetchurl, pkgs, ... }:
+{
+  stdenv,
+  fetchurl,
+  pkgs,
+  ...
+}:
 stdenv.mkDerivation rec {
   pname = "qemu";
   version = "9.0.0";

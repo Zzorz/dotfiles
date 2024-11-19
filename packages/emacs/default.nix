@@ -1,4 +1,4 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 pkgs.emacs-git-nox
 # pkgs.emacsWithPackagesFromUsePackage {
 #     package = pkgs.emacs-git-nox;
@@ -16,4 +16,3 @@ pkgs.emacs-git-nox
 #       epkgs.gruvbox-theme
 #     ];
 # }
-

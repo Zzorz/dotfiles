@@ -5,7 +5,7 @@
     inherit inputs;
     stateVersion = "24.05";
   };
-  modules = with inputs;[
+  modules = with inputs; [
     inputs.self.nixosModules.common
     home-manager.nixosModules.home-manager
     ./configuration.nix

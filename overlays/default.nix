@@ -1,8 +1,7 @@
-{ ... }:
-{
-  modifications = final: prev: {
+_: {
+  modifications = _final: prev: {
     # example
-    hello = prev.hello.overrideAttrs (oldAttrs: rec {
+    hello = prev.hello.overrideAttrs (_oldAttrs: rec {
       version = "2.12";
       src = prev.fetchurl {
         url = "mirror://gnu/hello/hello-${version}.tar.gz";

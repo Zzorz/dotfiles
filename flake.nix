@@ -2,25 +2,51 @@
   description = "RazYang's Nix Flake Configurations";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
-    home-manager.url = "github:nix-community/home-manager";
-    treefmt-nix.url = "https://github.com/numtide/treefmt-nix/archive/746901bb8dba96d154b66492a29f5db0693dbfcc.zip";
-    flake-programs-sqlite.url = "github:wamserma/flake-programs-sqlite";
-    nix-index-database.url = "github:nix-community/nix-index-database";
-    nixvim.url = "github:nix-community/nixvim";
-    
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
-    flake-programs-sqlite.inputs.nixpkgs.follows = "nixpkgs";
-    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
-    nixvim.inputs.nixpkgs.follows = "nixpkgs";
-    impermanence.url = "github:nix-community/impermanence";
+    nixpkgs = {
+      url = "github:NixOS/nixpkgs/nixos-unstable";
+    };
+    nixpkgs-stable = {
+      url = "github:NixOS/nixpkgs/nixos-24.05";
+    };
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
+    flakelight = {
+      url = "github:nix-community/flakelight";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    flake-programs-sqlite = {
+      url = "github:wamserma/flake-programs-sqlite";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    emacs-overlay = {
+      url = "github:nix-community/emacs-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs-stable.follows = "nixpkgs-stable";
+    };
+    impermanence.url = "github:nix-community/impermanence";
+    treefmt-nix = {
+      url = "https://github.com/numtide/treefmt-nix/archive/refs/heads/main.zip";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
-    inputs@{ ... }:
+    inputs:
     let
       systems = [
         "aarch64-linux"
@@ -43,6 +69,8 @@
         inputs.treefmt-nix.lib.evalModule pkgs {
           projectRootFile = "flake.nix";
           programs.nixfmt.enable = true;
+          programs.statix.enable = true;
+          programs.deadnix.enable = true;
           programs.deno.enable = true;
           programs.gofmt.enable = true;
           programs.rustfmt.enable = true;
@@ -60,6 +88,7 @@
       homeConfigurations = import ./home-configurations {
         inherit inputs pkgsWithSystem;
       };
+      devShells = eachSystem (pkgs: (import ./dev-shells { inherit inputs pkgs; }));
 
       formatter = eachSystem (pkgs: treefmtEval.${pkgs.system}.config.build.wrapper);
     };

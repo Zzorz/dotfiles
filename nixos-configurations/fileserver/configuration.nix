@@ -1,4 +1,8 @@
-{ self, inputs, pkgs, stateVersion, modulesPath, ... }@args:
+{
+  pkgs,
+  modulesPath,
+  ...
+}:
 
 {
   imports = [

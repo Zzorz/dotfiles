@@ -1,4 +1,3 @@
-{ ... }@args:
-{
+args: {
   playground = import ./playground args;
 }

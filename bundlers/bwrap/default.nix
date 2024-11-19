@@ -1,4 +1,10 @@
-{ pkgs, stdenv, writeScriptBin, ... }: drv:
+{
+  pkgs,
+  stdenv,
+  writeScriptBin,
+  ...
+}:
+drv:
 let
   entry-script = writeScriptBin "${drv.name}" ''
     #!/bin/sh
@@ -10,7 +16,7 @@ let
     mkdir -p $mountpoint
     umount $mountpoint > /dev/null 2>&1
     $prog_path/.erofs --offset=4096 $0 $mountpoint > /dev/null 2>&1 
-    
+
     if [ "$prog_name" = "${drv.name}-env" ]
     then
         prog_name=''${SHELL##*/}
@@ -28,11 +34,11 @@ let
   '';
 in
 stdenv.mkDerivation {
-  name = drv.name+".tar.gz";
+  name = drv.name + ".tar.gz";
   closureInfo = pkgs.closureInfo { rootPaths = [ drv ]; };
   bundledDrv = drv;
   src = ./.;
-  buildPhase= ''
+  buildPhase = ''
     bin_path=${drv.name}
     mkdir -p $bin_path
     script_name=${drv.name}-env
@@ -65,4 +71,3 @@ stdenv.mkDerivation {
     tar czf $out ${drv.name}
   '';
 }
-
