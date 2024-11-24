@@ -11,13 +11,6 @@
       };
       flake = inputs.nixpkgs;
     };
-    nixpkgs-stable = {
-      from = {
-        id = "nixpkgs-stable";
-        type = "indirect";
-      };
-      flake = inputs.nixpkgs-stable;
-    };
     home-manager = {
       from = {
         id = "home-manager";
