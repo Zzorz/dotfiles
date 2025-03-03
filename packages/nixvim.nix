@@ -21,9 +21,14 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
       options.desc = "Flash Treesitter selection";
     }
     {
-      key = "m";
-      action = ''<cmd>MCstart<cr>'';
-      options.desc = "Flash Treesitter selection";
+      key = "mm";
+      action = ''<cmd>lua require("multicursor-nvim").matchAllAddCursors()<cr>'';
+      options.desc = "MultiCursor Match All";
+    }
+    {
+      key = "m<esc>";
+      action = ''<cmd>lua require("multicursor-nvim").clearCursors()<cr>'';
+      options.desc = "MultiCursor Clear All Cursors";
     }
     {
       key = "<space><space>";
@@ -94,11 +99,14 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
     fidget.enable = true;
     noice = {
       enable = true;
-      cmdline.enabled = true;
-      presets = {
-        bottom_search = true;
-        long_message_to_split = true;
-        lsp_doc_border = true;
+      settings = {
+
+        cmdline.enabled = true;
+        presets = {
+          bottom_search = true;
+          long_message_to_split = true;
+          lsp_doc_border = true;
+        };
       };
     };
     web-devicons.enable = true;
@@ -139,7 +147,8 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
       servers = {
         bashls.enable = true;
         nil_ls.enable = true;
-        pyright.enable = true;
+        basedpyright.enable = true;
+        ruff.enable = true;
         rust_analyzer = {
           enable = true;
           installCargo = true;
@@ -152,6 +161,7 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
         jsonls.enable = true;
         denols.enable = true;
         marksman.enable = true;
+        ansiblels.enable = true;
       };
       keymaps = {
         diagnostic = {
@@ -229,16 +239,21 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
 
     copilot-lua = {
       enable = true;
-      panel.enabled = false;
-      suggestion.enabled = false;
-      # suggestion = {
-      #   autoTrigger = true;
-      #   keymap.accept = "<Enter>";
-      # };
+      settings = {
+        panel.enabled = false;
+        suggestion = {
+          enabled = false;
+          autoTrigger = true;
+          keymap.accept = "<Tab>";
+        };
+      };
     };
-    copilot-cmp = {
-      enable = true;
-    };
+    #copilot-cmp = {
+    #  enable = true;
+    #};
+    #copilot-chat = {
+    #  enable = true;
+    #};
 
     ##############################
     ### edit
@@ -260,6 +275,11 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
     };
     telescope = {
       enable = true;
+      settings.pickers = {
+        find_files = {
+          theme = "ivy";
+        };
+      };
       enabledExtensions = [ "ui-select" ];
       extensions = {
         undo = {
@@ -267,80 +287,6 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
         };
         ui-select = {
           enable = true;
-        };
-      };
-    };
-    multicursors = {
-      enable = true;
-      normalKeys = {
-        "<C-a>".method = false;
-        "<C-n>".method = false;
-        K.method = false;
-        Q.method = false;
-        J.method = false;
-        q.method = false;
-        "[".method = false;
-        "]".method = false;
-        "{".method = false;
-        "}".method = false;
-        "Z".method = false;
-        m = {
-          method = "require('multicursors.normal_mode').find_all_matches";
-          opts = {
-            desc = "Find all";
-          };
-        };
-      };
-      insertKeys = {
-        "<C-BS>".method = false;
-        "<C-Right>".method = false;
-        "<C-Left>".method = false;
-        "<Up>".method = false;
-        "<Down>".method = false;
-        "<A-f>" = {
-          method = "require('multicursors.insert_mode').C_Right";
-          opts = {
-            desc = "Word forward";
-          };
-        };
-        "<A-b>" = {
-          method = "require('multicursors.insert_mode').C_Left";
-          opts = {
-            desc = "Word back";
-          };
-        };
-        "<C-f>" = {
-          method = "require('multicursors.insert_mode').Right_method";
-          opts = {
-            desc = "Char forward";
-          };
-        };
-        "<C-b>" = {
-          method = "require('multicursors.insert_mode').Left_method";
-          opts = {
-            desc = "Char forward";
-          };
-        };
-        "<C-a>" = {
-          method = "require('multicursors.insert_mode').Home_method";
-          opts = {
-            desc = "Head of line";
-          };
-        };
-        "<C-e>" = {
-          method = "require('multicursors.insert_mode').End_method";
-          opts = {
-            desc = "End of line";
-          };
-        };
-      };
-      extendKeys = {
-        "^".method = false;
-        "0" = {
-          method = "require('multicursors.extend_mode').caret_method";
-          opts = {
-            desc = "Start of line";
-          };
         };
       };
     };
@@ -400,6 +346,24 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
         hash = "sha256-1/XgOCTFxFp72WkAMe3MkGcWjSw/xJ7OJvqiN/qT5RE=";
       };
     })
+    (pkgs.vimUtils.buildVimPlugin {
+      name = "grug-far";
+      src = pkgs.fetchFromGitHub {
+        owner = "MagicDuck";
+        repo = "grug-far.nvim";
+        rev = "11d0fbd6fff6f4e394af95319deeaab4ef88ce97";
+        hash = "sha256-DkVRoxrD/9nlNORGq46CAQvIWjyga+TRvZ74uFKIq8I=";
+      };
+    })
+    (pkgs.vimUtils.buildVimPlugin {
+      name = "multicursor.nvim";
+      src = pkgs.fetchFromGitHub {
+        owner = "jake-stewart";
+        repo = "multicursor.nvim";
+        rev = "master";
+        hash = "sha256-rX346rQRJE6SauY/AxhUM4GgAbCt/gep8WPlRm47U4U=";
+      };
+    })
     pkgs.vimPlugins.tabout-nvim
     pkgs.vimPlugins.nvim-highlight-colors
     pkgs.vimPlugins.gruvbox-baby
@@ -444,6 +408,20 @@ inputs.nixvim.legacyPackages."${system}".makeNixvim {
 
     require('nvim-highlight-colors').setup({})
     require('guess-indent').setup({})
+    vim.g.maplocalleader = 'r'
+    require('grug-far').setup({
+      windowCreationCommand = 'tabnew',
+    })
+    require("multicursor-nvim").setup({})
+    local hl = vim.api.nvim_set_hl
+    hl(0, "MultiCursorCursor", { link = "Cursor" })
+    hl(0, "MultiCursorVisual", { link = "Visual" })
+    hl(0, "MultiCursorSign", { link = "SignColumn"})
+    hl(0, "MultiCursorMatchPreview", { link = "Search" })
+    hl(0, "MultiCursorDisabledCursor", { link = "Visual" })
+    hl(0, "MultiCursorDisabledVisual", { link = "Visual" })
+    hl(0, "MultiCursorDisabledSign", { link = "SignColumn"})
+
 
     vim.g.gruvbox_baby_telescope_theme = 1
     vim.g.gruvbox_baby_background_color = "dark"
